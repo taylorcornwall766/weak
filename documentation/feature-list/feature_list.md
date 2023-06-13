@@ -1,7 +1,5 @@
 # MVP List
 
-PhillyRoll, a Crunchyroll clone, is a website for users to watch anime, engage in light discussion, post anime, and spread their interests.
-
 ## 0. New account creation, log in, log out, and guest/demo login
 
 * Users can sign up, log in, and log out.

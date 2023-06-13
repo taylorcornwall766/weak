@@ -25,6 +25,13 @@ function App() {
           </Route>
 
           <Route  exact path="/home" >
+            
+          </Route>
+          <Route  exact path="/leaderboards" >
+
+          </Route>
+
+          <Route  exact path="/exercises" >
             <HomePage />
           </Route>
 
