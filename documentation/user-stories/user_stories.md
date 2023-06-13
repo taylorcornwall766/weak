@@ -1,7 +1,7 @@
 # User Stories
 
 ## Landing Page
-* When navigating to the website, I should see signup page `/signup` with an option to click login for already existing users.
+* When navigating to the website, I should see a landingpage `/` with an option to click login for already existing users, a demo user login, and a signup form for new users.
 
 ## Users (CR)
 ### Sign Up
