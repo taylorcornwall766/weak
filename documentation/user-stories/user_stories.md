@@ -14,7 +14,7 @@
   * When I enter invalid data on the sign-up form:
     * I would like the website to inform me of the validations I failed to pass, and repopulate the form with my valid entries (except my password).
     * So that I can try again without needing to refill forms I entered valid data into.
-  * I can sign up as either a certified or non certified user, ONLY certified users can post exercises.
+
 
 ### Log in
 
@@ -31,9 +31,9 @@
 
 ### Demo User
 
-* As an unregistered and unauthorized user, I would like an easy to find and clear button on both the `/signup` and `/login` pages to allow me to visit the site as a guest without signing up or logging in.
-  * When I'm on either the `/signup` or `/login` pages:
-    * I can click on a Demo User button for either a certified demo profile or a regular user profile to log me in and allow me access the site's functionality based off the user's permissions.
+* As an unregistered and unauthorized user, I would like an easy to find and clear button on the landing page to allow me to visit the site as a guest without signing up or logging in.
+  * When I'm on the landing page:
+    * I can click on a Demo User button for demo profile or  sign up as regular user profile or open a modal to log me in and allow me access the site's functionality.
 
 ### Log Out
 
@@ -50,7 +50,7 @@
   * I should also be able to view all exercises when adding exercises to a workout
 
 ### Adding an exercises
-* As a logged in certified user, I should be able to  click on a button on my page to create a new exercise, this button will open a modal to create the exercise.
+* As a logged in user, I should be able to  click on a button on my page to create a new exercise, this button will open the `/exercises/new` page to create the exercise.
   * after successfully submitting the exercise the modal should close and the my exercises carousel should update
 ### Deleting an exercise
   * on hover over an exercise in my carousel I should see a delete button, which will open a confirm delete modal, the confirm delete modal will then either cancel the delete or delete the exercise

@@ -6,14 +6,14 @@ PhillyRoll, a Crunchyroll clone, is a website for users to watch anime, engage i
 
 * Users can sign up, log in, and log out.
 * Users can use a demo log in to try the site.
-* Users can't use certain features without logging in to a certified account (like creating or editing an exercise, workout or routine).
+* Users can't use certain features without logging in to an account (like creating or editing an exercise, workout or routine).
 * Logged in users are directed to the home page
 * Logged out users are directed to the landing page.
 
 ## 1. Exercises CRUD:
 
 ### C -
-* certified users can post (create) exercises with the following required fields: name, description, and primary_muscle. They will also have the following optional (nullable true) fields: secondary_muscle, tertiary_muscle, start_photo and end_photo.
+* users can post (create) exercises with the following required fields: name, description, and primary_muscle. They will also have the following optional (nullable true) fields: secondary_muscle, tertiary_muscle, start_photo and end_photo.
 
 ### R -
  *  all users can view (read) all of the exercises for any given muscle group.
@@ -55,7 +55,7 @@ PhillyRoll, a Crunchyroll clone, is a website for users to watch anime, engage i
 ## 4. leaderboard CRUD:
 
 ### C -
-* all users can create a leaderboard with the following required fields: leaderboard type, private (boolean)
+* all users can create a leaderboard with the following required fields: leaderboard type, private (boolean) and name
 
 ### R -
 * all users can view private = false leaderboards, and users who are added to private leaderboards can view them
@@ -68,6 +68,8 @@ PhillyRoll, a Crunchyroll clone, is a website for users to watch anime, engage i
 
 ## BONUS:
 
+
+
 ### Weight (CRUD)
   * on the logged in user's page `/users/me` I should see a weight chart, that I shows my historical weight entries in a simple line chart. I should also see an update button which allows me to add an entry.
   * I should be able to update previous entries by clicking on them and entering a number into a modal
@@ -78,4 +80,3 @@ PhillyRoll, a Crunchyroll clone, is a website for users to watch anime, engage i
 
 ### Search (R)
   * on all pages I should see a search bar which allows me to search for users easily
-
