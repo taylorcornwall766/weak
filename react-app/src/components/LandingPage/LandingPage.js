@@ -10,7 +10,7 @@ function LandingPage(){
     const history = useHistory()
 
     const demoLogin = async() =>{
-        await dispatch(sessionActions.login("demo@aa.io", "password"))
+        await dispatch(sessionActions.login("bobbie@aa.io", "password"))
         return history.push("/home")
     }
     return (
