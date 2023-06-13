@@ -1,0 +1,28 @@
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+from datetime import datetime
+
+class Exercise(db.Model):
+    __tablename__ = 'exercises'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(40), nullable=False, unique=True)
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    hashed_password = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(25), nullable=False)
+    last_name = db.Column(db.String(25), nullable=False)
+    height = db.Column(db.Integer, nullable=True)
+    private = db.Column(db.Boolean, nullable=False, default=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'height': self.height,
+            'private': self.private
+        }
