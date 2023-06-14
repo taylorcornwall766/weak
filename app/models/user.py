@@ -41,3 +41,5 @@ class User(db.Model, UserMixin):
             'height': self.height,
             'private': self.private
         }
+
+    exercise = db.relationship('Exercise', cascade="all, delete-orphan", back_populates='authorId')

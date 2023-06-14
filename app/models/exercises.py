@@ -8,21 +8,28 @@ class Exercise(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
-    first_name = db.Column(db.String(25), nullable=False)
-    last_name = db.Column(db.String(25), nullable=False)
-    height = db.Column(db.Integer, nullable=True)
-    private = db.Column(db.Boolean, nullable=False, default=False)
+    author_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    name = db.Column(db.String(40), nullable=False, unique=True)
+    primary_muscle = db.Column(db.String(50), nullable=False)
+    secondary_muscle = db.Column(db.String(50), nullable=True)
+    tertiary_muscle = db.Column(db.String(50), nullable=True)
+    description = db.Column(db.String(25), nullable=False)
+    start_photo = db.Column(db.String(1000), nullable=True)
+    end_photo = db.Column(db.String(1000), nullable=True)
+
+    authorId = db.relationship(
+        "User", back_populates = 'exercise'
+    )
 
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email,
-            'firstName': self.first_name,
-            'lastName': self.last_name,
-            'height': self.height,
-            'private': self.private
+            'authorId': self.author_id,
+            'name': self.name,
+            'primaryMuscle': self.primary_muscle,
+            'secondaryMuscle': self.secondary_muscle or False,
+            'tertiaryMuscle': self.tertiary_muscle or False,
+            'description': self.description,
+            'startPhoto': self.start_photo or False,
+            'endPhoto': self.end_photo or False
         }
