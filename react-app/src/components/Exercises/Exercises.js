@@ -14,6 +14,7 @@ function ExercisePage() {
   }, [dispatch]);
   const handleClick = (exercise) => {
     setDetails(exercise);
+    console.log(exercise)
   };
   const muscleGroups = {
     "legs":[],
@@ -82,16 +83,18 @@ function ExercisePage() {
       <h1>exercises</h1>
       <div className="details-div">
 
-        <h2>{details.name}:</h2>
+        {details &&
+            <>
+            <h2>{details.name}:</h2>
         <p>{details.description}</p>
         <p>Muscle Groups:</p>
         <ul>
             <li>{details.primaryMuscle}</li>
             {details.secondaryMuscle&&<li>{details.secondaryMuscle}</li>}
             {details.tertiaryMuscle&&<li>{details.tertiaryMuscle}</li>}
-            <p>{details.authorId}</p>
         </ul>
-
+        <p>{`${details.author.lastName}, ${details.author.firstName}`}</p>
+        </>}
       </div>
 
         <div className="musclegroup-container">
