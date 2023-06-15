@@ -80,7 +80,7 @@ function ExercisePage() {
 
   return (
     <>
-      <h1>exercises</h1>
+      <h1>Exercises</h1>
       <div className="details-div">
 
         {details &&
