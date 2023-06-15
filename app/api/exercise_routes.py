@@ -2,10 +2,36 @@ from flask import Blueprint, jsonify, session, request
 from app.models.exercises import Exercise
 from app.models.db import db
 from app.forms.exercise_form import ExerciseForm
+from app.forms.edit_exercise_form import ExerciseEditForm
 from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
 
 exercise_routes = Blueprint("exercise", __name__)
+
+@exercise_routes.route("/<int:exercise_id>/edit", methods=['PUT'])
+@login_required
+def edit_exercise(exercise_id):
+    exercise_to_edit = Exercise.query.get(exercise_id)
+    if exercise_to_edit is None:
+        return {'errors': 'exercise cannot be found'}
+    exercise_dict = exercise_to_edit.to_dict()
+    if exercise_dict["authorId"] is not int(current_user.id):
+        return {'errors': 'you can only edit exercises you have posted!'}
+    form = ExerciseEditForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        exercise_to_edit.description = form.data["description"]
+        exercise_to_edit.primary_muscle = form.data["primary_muscle"]
+        exercise_to_edit.secondary_muscle = form.data["secondary_muscle"]
+        exercise_to_edit.tertiary_muscle = form.data["tertiary_muscle"]
+        exercise_to_edit.start_photo = form.data["start_photo"]
+        exercise_to_edit.end_photo = form.data["end_photo"]
+        db.session.commit()
+        edited_exercise = exercise_to_edit.to_dict()
+        return edited_exercise
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}
+
 
 @exercise_routes.route("")
 def get_all_exercises():

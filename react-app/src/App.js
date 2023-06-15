@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage/LandingPage";
 import HomePage from "./components/HomePage/HomePage";
+import ExercisePage from "./components/Exercises/Exercises";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,14 +26,14 @@ function App() {
           </Route>
 
           <Route  exact path="/home" >
-            
+
           </Route>
           <Route  exact path="/leaderboards" >
 
           </Route>
 
           <Route  exact path="/exercises" >
-            <HomePage />
+            <ExercisePage />
           </Route>
 
         </Switch>
