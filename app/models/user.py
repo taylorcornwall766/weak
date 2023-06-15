@@ -41,5 +41,15 @@ class User(db.Model, UserMixin):
             'height': self.height,
             'private': self.private
         }
+    def to_exercise_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'createdAt': self.createdAt.strftime("%m/%d/%Y"),
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'height': self.height,
+            'private': self.private
+        }
 
     exercise = db.relationship('Exercise', cascade="all, delete-orphan", back_populates='authorId')

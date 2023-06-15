@@ -24,12 +24,12 @@ class Exercise(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'authorId': self.author_id,
             'name': self.name,
             'primaryMuscle': self.primary_muscle,
             'secondaryMuscle': self.secondary_muscle or False,
             'tertiaryMuscle': self.tertiary_muscle or False,
             'description': self.description,
             'startPhoto': self.start_photo or False,
-            'endPhoto': self.end_photo or False
+            'endPhoto': self.end_photo or False,
+            'author': self.authorId.to_exercise_dict(),
         }

@@ -16,9 +16,7 @@ function ExercisePage() {
     setDetails(exercise);
   };
   const muscleGroups = {
-    "calves":[],
-    "quad":[],
-    "hamstring":[],
+    "legs":[],
     "shoulder":[],
     "bicep":[],
     "tricep":[],
@@ -28,38 +26,139 @@ function ExercisePage() {
     "core":[]
   }
   const exArr = Object.values(exercises)
+//   splitting each of the exercises into their respective muscle groups, not sure if this should be done in the store/ reducer
+//   or if here is best
   exArr.forEach((exercise)=> {
-    Switch
+    const primaryMuscle = exercise.primaryMuscle
+    switch (primaryMuscle){
+        case "back":
+        case "upperback":
+        case "lowerback":
+        case "lats":{
+            muscleGroups.back.push(exercise)
+            break
+        }
+        case "shoulder":{
+            muscleGroups.shoulder.push(exercise)
+            break
+        }
+        case "bicep":{
+            muscleGroups.bicep.push(exercise)
+            break
+        }
+        case "tricep":{
+            muscleGroups.tricep.push(exercise)
+            break
+        }
+        case "forearm":{
+            muscleGroups.forearm.push(exercise)
+            break
+        }
+        case "chest":{
+            muscleGroups.chest.push(exercise)
+            break
+        }
+        case "core":{
+            muscleGroups.core.push(exercise)
+            break
+        }
+        case "legs":
+        case "quads":
+        case "hamstring":
+        case "calves":{
+            muscleGroups.legs.push(exercise)
+            break
+        }
+        default:{
+            break
+        }
+
+    }
   })
-  console.log(muscleGroups)
+//   console.log(muscleGroups)
+
   return (
     <>
       <h1>exercises</h1>
       <div className="details-div">
-        <h2>{details.name}</h2>
+
+        <h2>{details.name}:</h2>
+        <p>{details.description}</p>
+        <p>Muscle Groups:</p>
+        <ul>
+            <li>{details.primaryMuscle}</li>
+            {details.secondaryMuscle&&<li>{details.secondaryMuscle}</li>}
+            {details.tertiaryMuscle&&<li>{details.tertiaryMuscle}</li>}
+            <p>{details.authorId}</p>
+        </ul>
 
       </div>
 
-          {exArr.map((exercise) =>
+        <div className="musclegroup-container">
+            <h2 className="musclegroup-header">Back</h2>
+          {muscleGroups.back.map((exercise) =>
             <li key={`exercise-tile-${exercise.id}-li`}>
              <ExerciseTile exercise={exercise} handleClick={handleClick} key={`exercise-tile-${exercise.id}`}/>
             </li>
-         )}
-          {exArr.map((exercise) =>
+          )}
+        </div>
+        <div className="musclegroup-container">
+            <h2 className="musclegroup-header">Chest</h2>
+          {muscleGroups.chest.map((exercise) =>
             <li key={`exercise-tile-${exercise.id}-li`}>
              <ExerciseTile exercise={exercise} handleClick={handleClick} key={`exercise-tile-${exercise.id}`}/>
             </li>
-         )}
-          {exArr.map((exercise) =>
+          )}
+        </div>
+        <div className="musclegroup-container">
+            <h2 className="musclegroup-header">Shoulder</h2>
+          {muscleGroups.shoulder.map((exercise) =>
             <li key={`exercise-tile-${exercise.id}-li`}>
              <ExerciseTile exercise={exercise} handleClick={handleClick} key={`exercise-tile-${exercise.id}`}/>
             </li>
-         )}
-          {exArr.map((exercise) =>
+          )}
+        </div>
+        <div className="musclegroup-container">
+            <h2 className="musclegroup-header">Bicep</h2>
+          {muscleGroups.bicep.map((exercise) =>
             <li key={`exercise-tile-${exercise.id}-li`}>
              <ExerciseTile exercise={exercise} handleClick={handleClick} key={`exercise-tile-${exercise.id}`}/>
             </li>
-         )}
+          )}
+        </div>
+        <div className="musclegroup-container">
+            <h2 className="musclegroup-header">Tricep</h2>
+          {muscleGroups.tricep.map((exercise) =>
+            <li key={`exercise-tile-${exercise.id}-li`}>
+             <ExerciseTile exercise={exercise} handleClick={handleClick} key={`exercise-tile-${exercise.id}`}/>
+            </li>
+          )}
+        </div>
+        <div className="musclegroup-container">
+            <h2 className="musclegroup-header">Forearm</h2>
+          {muscleGroups.forearm.map((exercise) =>
+            <li key={`exercise-tile-${exercise.id}-li`}>
+             <ExerciseTile exercise={exercise} handleClick={handleClick} key={`exercise-tile-${exercise.id}`}/>
+            </li>
+          )}
+        </div>
+        <div className="musclegroup-container">
+            <h2 className="musclegroup-header">Legs</h2>
+          {muscleGroups.legs.map((exercise) =>
+            <li key={`exercise-tile-${exercise.id}-li`}>
+             <ExerciseTile exercise={exercise} handleClick={handleClick} key={`exercise-tile-${exercise.id}`}/>
+            </li>
+          )}
+        </div>
+        <div className="musclegroup-container">
+            <h2 className="musclegroup-header">Core</h2>
+          {muscleGroups.core.map((exercise) =>
+            <li key={`exercise-tile-${exercise.id}-li`}>
+             <ExerciseTile exercise={exercise} handleClick={handleClick} key={`exercise-tile-${exercise.id}`}/>
+            </li>
+          )}
+        </div>
+
 
     </>
   );
