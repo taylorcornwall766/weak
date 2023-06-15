@@ -13,7 +13,7 @@ class Exercise(db.Model):
     primary_muscle = db.Column(db.String(50), nullable=False)
     secondary_muscle = db.Column(db.String(50), nullable=True)
     tertiary_muscle = db.Column(db.String(50), nullable=True)
-    description = db.Column(db.String(25), nullable=False)
+    description = db.Column(db.String(1000), nullable=False)
     start_photo = db.Column(db.String(1000), nullable=True)
     end_photo = db.Column(db.String(1000), nullable=True)
 
