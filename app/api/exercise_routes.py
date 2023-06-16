@@ -33,7 +33,7 @@ def edit_exercise(exercise_id):
         edited_exercise = exercise_to_edit.to_dict()
         return edited_exercise
     else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}
+        return form.errors, 400
 
 
 @exercise_routes.route("")
@@ -52,7 +52,7 @@ def delete_exercise(exercise_id):
         return {'errors': 'exercise cannot be found'}
     # revise
     exercise_dict = exercise_to_delete.to_dict()
-    if exercise_dict["authorId"] is not int(current_user.id):
+    if exercise_dict["author"]["id"] is not int(current_user.id):
         return {'errors': 'you can only delete exercises you have posted!'}
 
     db.session.delete(exercise_to_delete)
@@ -67,7 +67,9 @@ def post_exercise():
     form = ExerciseForm()
     user_id = current_user.id
     form["csrf_token"].data = request.cookies["csrf_token"]
-
+    print("-----------")
+    print(form.data)
+    print("-----------")
     if form.validate_on_submit():
         new_exercise = Exercise(
             author_id = int(user_id),
@@ -89,4 +91,4 @@ def post_exercise():
     # else
     else:
         # change this to just return form.errors, statuscode
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        return form.errors, 400

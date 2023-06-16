@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllExercisesThunk } from "../../store/exercises";
+import { deleteExerciseThunk, getAllExercisesThunk } from "../../store/exercises";
 import ExerciseTile from "./ExerciseTile";
 import OpenModalButton from "../OpenModalButton";
 import CreateExerciseModal from "./ExerciseModal";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal.js";
 function ExercisePage() {
   const dispatch = useDispatch();
   // const history = useHistory()
   const exercises = useSelector((state) => state.exercise);
+  const user = useSelector((state) => state.session.user);
   const [details, setDetails] = useState(false);
   // console.log(exercises)
   useEffect(() => {
     dispatch(getAllExercisesThunk());
   }, [dispatch]);
+  useEffect(() =>{
+    // setDetails(false)
+  }, [exercises])
+
   const handleClick = (exercise) => {
     setDetails(exercise);
     // console.log(exercise)
@@ -85,7 +91,7 @@ function ExercisePage() {
       <OpenModalButton
         className="exercise-modal"
         buttonText="Create Exercise"
-        modalComponent={<CreateExerciseModal/>}
+        modalComponent={<CreateExerciseModal setDetails={setDetails}/>}
       />
       <div className="details-div">
 
@@ -101,6 +107,14 @@ function ExercisePage() {
         </ul>
         <p>{`${details.author.lastName}, ${details.author.firstName}`}</p>
         </>}
+        {
+          details && details.author.id == user.id &&
+          <OpenModalButton
+            className="delete-modal"
+            buttonText="Delete"
+            modalComponent={<ConfirmDeleteModal exerciseId={details.id} name="Exercise" setDetails={setDetails}/>}
+          />
+        }
       </div>
 
         <div className="musclegroup-container">
