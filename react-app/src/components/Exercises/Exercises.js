@@ -2,19 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllExercisesThunk } from "../../store/exercises";
 import ExerciseTile from "./ExerciseTile";
-import { Switch } from "react-router-dom/cjs/react-router-dom.min";
+import OpenModalButton from "../OpenModalButton";
+import CreateExerciseModal from "./ExerciseModal";
 function ExercisePage() {
   const dispatch = useDispatch();
   // const history = useHistory()
   const exercises = useSelector((state) => state.exercise);
-  console.log(exercises)
   const [details, setDetails] = useState(false);
+  // console.log(exercises)
   useEffect(() => {
     dispatch(getAllExercisesThunk());
   }, [dispatch]);
   const handleClick = (exercise) => {
     setDetails(exercise);
-    console.log(exercise)
+    // console.log(exercise)
   };
   const muscleGroups = {
     "legs":[],
@@ -81,6 +82,11 @@ function ExercisePage() {
   return (
     <>
       <h1>Exercises</h1>
+      <OpenModalButton
+        className="exercise-modal"
+        buttonText="Create Exercise"
+        modalComponent={<CreateExerciseModal/>}
+      />
       <div className="details-div">
 
         {details &&

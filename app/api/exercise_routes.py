@@ -8,6 +8,9 @@ from app.api.auth_routes import validation_errors_to_error_messages
 
 exercise_routes = Blueprint("exercise", __name__)
 
+# import request from flask
+# request.get_json()
+
 @exercise_routes.route("/<int:exercise_id>/edit", methods=['PUT'])
 @login_required
 def edit_exercise(exercise_id):
@@ -47,6 +50,7 @@ def delete_exercise(exercise_id):
     exercise_to_delete = Exercise.query.get(exercise_id)
     if exercise_to_delete is None:
         return {'errors': 'exercise cannot be found'}
+    # revise
     exercise_dict = exercise_to_delete.to_dict()
     if exercise_dict["authorId"] is not int(current_user.id):
         return {'errors': 'you can only delete exercises you have posted!'}
@@ -84,4 +88,5 @@ def post_exercise():
         # return new exericse.todict()
     # else
     else:
+        # change this to just return form.errors, statuscode
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
