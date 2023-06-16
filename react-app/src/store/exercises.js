@@ -2,6 +2,22 @@ const GET_ALL_EXERCISES = "exercises/getAllExercises";
 const POST_EXERCISE = "exercises/postExercise";
 const DELETE_EXERCISE = "exercise/deleteExercise";
 
+export const editExerciseThunk = (exercise) => async (dispatch) =>{
+    console.log("exercise in thunk :", exercise);
+  const editExerciseResponse = await fetch(`/api/exercise/${exercise.id}/edit`, {
+    method: "put",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(exercise),
+  });
+  const editExerciseData = await editExerciseResponse.json();
+  if (editExerciseResponse.ok) {
+    dispatch(postExercise(editExerciseData));
+    return editExerciseData;
+  }
+  console.log(editExerciseData);
+  return null;
+}
+
 const deleteExercise = (exerciseId) => {
   return {
     type: DELETE_EXERCISE,

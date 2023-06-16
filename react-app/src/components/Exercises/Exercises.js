@@ -5,6 +5,7 @@ import ExerciseTile from "./ExerciseTile";
 import OpenModalButton from "../OpenModalButton";
 import CreateExerciseModal from "./ExerciseModal";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal.js";
+import EditExerciseModal from "./EditExerciseModal";
 function ExercisePage() {
   const dispatch = useDispatch();
   // const history = useHistory()
@@ -109,11 +110,18 @@ function ExercisePage() {
         </>}
         {
           details && details.author.id == user.id &&
+          <>
           <OpenModalButton
             className="delete-modal"
             buttonText="Delete"
             modalComponent={<ConfirmDeleteModal exerciseId={details.id} name="Exercise" setDetails={setDetails}/>}
           />
+          <OpenModalButton
+            className="edit-modal"
+            buttonText="Edit"
+            modalComponent={<EditExerciseModal setDetails={setDetails} details={details}/>}
+          />
+          </>
         }
       </div>
 
