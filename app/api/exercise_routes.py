@@ -18,7 +18,7 @@ def edit_exercise(exercise_id):
     if exercise_to_edit is None:
         return {'errors': 'exercise cannot be found'}
     exercise_dict = exercise_to_edit.to_dict()
-    if exercise_dict["authorId"] is not int(current_user.id):
+    if exercise_dict["author"]["id"] is not int(current_user.id):
         return {'errors': 'you can only edit exercises you have posted!'}
     form = ExerciseEditForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
