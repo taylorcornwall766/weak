@@ -67,9 +67,9 @@ def post_exercise():
     form = ExerciseForm()
     user_id = current_user.id
     form["csrf_token"].data = request.cookies["csrf_token"]
-    print("-----------")
-    print(form.data)
-    print("-----------")
+    # print("-----------")
+    # print(form.data)
+    # print("-----------")
     if form.validate_on_submit():
         new_exercise = Exercise(
             author_id = int(user_id),

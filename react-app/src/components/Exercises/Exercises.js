@@ -16,9 +16,6 @@ function ExercisePage() {
   useEffect(() => {
     dispatch(getAllExercisesThunk());
   }, [dispatch]);
-  useEffect(() =>{
-    // setDetails(false)
-  }, [exercises])
 
   const handleClick = (exercise) => {
     setDetails(exercise);

@@ -9,7 +9,7 @@ class Routine(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    name = db.Column(db.String(50), nullable=False, unique=True)
+    name = db.Column(db.String(50), nullable=False)
     muscle_group_one = db.Column(db.String(50), nullable=False)
     muscle_group_two = db.Column(db.String(50), nullable=True)
     muscle_group_three = db.Column(db.String(50), nullable=True)
@@ -17,11 +17,11 @@ class Routine(db.Model):
     muscle_group_five = db.Column(db.String(50), nullable=True)
     description = db.Column(db.String(1000), nullable=False)
 
-    authorId = db.relationship(
-        "User", back_populates = 'exercise'
+    routineAuthorId = db.relationship(
+        "User", back_populates = 'routine'
     )
-    routine_exercise = db.relationship(
-        "RoutineExercise", backref='routine', lazy='dynamic'
+    routine_routine_exercise = db.relationship(
+        "RoutineExercise", back_populates='routine_exercise_routine'
     )
 
     def to_dict(self):
@@ -34,6 +34,6 @@ class Routine(db.Model):
             'muscle_group_four': self.muscle_group_four or False,
             'muscle_group_five': self.muscle_group_five or False,
             'description': self.description,
-            'author': self.authorId.to_exercise_dict(),
-            'routine_exercises': [exercise.to_dict() for exercise in self.routine_exercises]
+            'author': self.routineAuthorId.to_exercise_dict(),
+            'routine_exercises': [exercise.to_dict() for exercise in self.routine_routine_exercise]
         }

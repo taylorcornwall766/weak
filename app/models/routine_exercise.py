@@ -12,9 +12,18 @@ class RoutineExercise(db.Model):
     exercise_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('exercises.id')), nullable=False)
     sets = db.Column(db.Integer, nullable=False)
 
-    routine = db.relationship(
-        "Routine", back_populates = 'routine_exercise'
+    # routine = db.relationship(
+    #     "Routine", back_populates = 'routine_exercise'
+    # )
+    routine_exercise_routine = db.relationship(
+        "Routine", back_populates='routine_routine_exercise'
     )
+
+    routine_exercise_exercise = db.relationship(
+        "Exercise", back_populates='exercise_routine_exercise'
+    )
+
+
 
 
     def to_dict(self):

@@ -20,6 +20,9 @@ class Exercise(db.Model):
     authorId = db.relationship(
         "User", back_populates = 'exercise'
     )
+    exercise_routine_exercise = db.relationship(
+        "RoutineExercise", back_populates='routine_exercise_exercise'
+    )
 
     def to_dict(self):
         return {
