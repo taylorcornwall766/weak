@@ -49,7 +49,7 @@ def get_all_exercises():
 def delete_exercise(exercise_id):
     exercise_to_delete = Exercise.query.get(exercise_id)
     if exercise_to_delete is None:
-        return {'errors': 'exercise cannot be found'}
+        return {'errors': 'exercise cannot be found'}, 404
     # revise
     exercise_dict = exercise_to_delete.to_dict()
     if exercise_dict["author"]["id"] is not int(current_user.id):

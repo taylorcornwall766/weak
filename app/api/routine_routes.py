@@ -42,4 +42,10 @@ def delete_routine(routine_id):
     routine_to_delete = Routine.query.get(routine_id)
     if routine_to_delete is None:
         return {'errors': 'routine not found'}, 404
-    
+    routine_dict = routine_to_delete.to_dict()
+    if routine_dict["author"]["id"] is not int(current_user.id):
+        return {'errors': 'you can only delete routines you have posted!'}, 401
+
+    db.session.delete(routine_to_delete)
+    db.session.commit()
+    return {'message': 'routine deleted'}

@@ -4,7 +4,7 @@ const DELETE_EXERCISE = "exercise/deleteExercise";
 
 export const editExerciseThunk = (exercise) => async (dispatch) =>{
     console.log("exercise in thunk :", exercise);
-  const editExerciseResponse = await fetch(`/api/exercise/${exercise.id}/edit`, {
+  const editExerciseResponse = await fetch(`/api/exercises/${exercise.id}/edit`, {
     method: "put",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(exercise),
@@ -27,7 +27,7 @@ const deleteExercise = (exerciseId) => {
 
 export const deleteExerciseThunk = (exerciseId) => async (dispatch) => {
   const deleteExerciseResponse = await fetch(
-    `/api/exercise/${exerciseId}/delete`,
+    `/api/exercises/${exerciseId}/delete`,
     {
       method: "DELETE",
     }
@@ -49,7 +49,7 @@ const postExercise = (exercise) => {
 
 export const postExerciseThunk = (exercise) => async (dispatch) => {
   console.log("exercise in thunk :", exercise);
-  const newExerciseResponse = await fetch(`/api/exercise/new`, {
+  const newExerciseResponse = await fetch(`/api/exercises/new`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(exercise),
@@ -70,7 +70,7 @@ const getAllExercises = (exercises) => {
   };
 };
 export const getAllExercisesThunk = () => async (dispatch) => {
-  const exerciseResponse = await fetch(`/api/exercise`);
+  const exerciseResponse = await fetch(`/api/exercises`);
   const data = await exerciseResponse.json();
   // console.log('this is data: ', data)
   if (exerciseResponse.ok) {
