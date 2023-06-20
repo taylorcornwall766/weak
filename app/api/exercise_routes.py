@@ -16,10 +16,10 @@ exercise_routes = Blueprint("exercise", __name__)
 def edit_exercise(exercise_id):
     exercise_to_edit = Exercise.query.get(exercise_id)
     if exercise_to_edit is None:
-        return {'errors': 'exercise cannot be found'}
+        return {'errors': 'exercise cannot be found'}, 404
     exercise_dict = exercise_to_edit.to_dict()
     if exercise_dict["author"]["id"] is not int(current_user.id):
-        return {'errors': 'you can only edit exercises you have posted!'}
+        return {'errors': 'you can only edit exercises you have posted!'}, 401
     form = ExerciseEditForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():

@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from app.models.routines import Routine
 from app.models.db import db
 from app.forms.routine_form import RoutineForm
+from app.forms.edit_routine_form import EditRoutineForm
 from flask_login import login_required, current_user
 
 routine_routes = Blueprint("routine", __name__)
@@ -49,3 +50,28 @@ def delete_routine(routine_id):
     db.session.delete(routine_to_delete)
     db.session.commit()
     return {'message': 'routine deleted'}
+
+@routine_routes.route("/<int:routine_id>/edit", methods=["PUT"])
+@login_required
+def edit_routine(routine_id):
+    routine_to_edit = Routine.query.get(routine_id)
+    if routine_to_edit is None:
+        return {'errors': 'routine cannot be found'}, 404
+    routine_dict = routine_to_edit.to_dict()
+    if routine_dict["author"]["id"] is not int(current_user.id):
+        return {'errors': 'you can only edit routines you have posted!'}, 401
+    form = EditRoutineForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        routine_to_edit.description = form.data["description"]
+        routine_to_edit.name = form.data["name"]
+        routine_to_edit.muscle_group_one = form.data["muscle_group_one"]
+        routine_to_edit.muscle_group_two = form.data["muscle_group_two"]
+        routine_to_edit.muscle_group_three = form.data["muscle_group_three"]
+        routine_to_edit.muscle_group_four = form.data["muscle_group_four"]
+        routine_to_edit.muscle_group_five = form.data["muscle_group_five"]
+        db.session.commit()
+        edited_routine = routine_to_edit.to_dict()
+        return edited_routine
+    else:
+        return form.errors, 400

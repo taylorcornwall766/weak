@@ -1,12 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired, ValidationError
 from app.models.routines import Routine
 
-def routine_exists(form, field):
-    name = field.data
-    routine = Routine.query.filter(Routine.name == name).first()
-    
+# def routine_exists(form, field):
+#     name = field.data
+#     routine = Routine.query.filter(Routine.name == name, Routine.id != form.data["routine_id"]).first()
+#     if routine:
+#         raise ValidationError('Name is already in use')
 
 class EditRoutineForm(FlaskForm):
     name = StringField(
@@ -30,3 +31,4 @@ class EditRoutineForm(FlaskForm):
     description = StringField(
         'description', validators=[DataRequired()]
     )
+    
