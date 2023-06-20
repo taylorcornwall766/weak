@@ -19,7 +19,7 @@ function CreateExerciseModal({setDetails}) {
         e.preventDefault();
         const newExercise = {
             "name":name,
-            "description":description,
+            "description":description.trim(),
             "primary_muscle": primaryMuscle,
             "secondary_muscle": secondaryMuscle || null,
             "tertiary_muscle": tertiaryMuscle || null,
@@ -71,7 +71,7 @@ function CreateExerciseModal({setDetails}) {
                         onChange={(e)=> setDescription(e.target.value)}
                         required
                     />
-                    <p className='description characters'>{999-description.length} characters remaining</p>
+                    <p className='description characters'>{999-description.trim().length} characters remaining</p>
                 </label>
                 <label>
                     Primary Muscle *

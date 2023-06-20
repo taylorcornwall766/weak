@@ -10,7 +10,7 @@ function LandingPage(){
     const history = useHistory()
     const user = useSelector((state)=> state.session.user)
     if (user){
-        history.push("")
+        history.push("/home")
     }
     const demoLogin = async() =>{
         await dispatch(sessionActions.login("bobbie@aa.io", "password"))

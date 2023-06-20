@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage/LandingPage";
 import HomePage from "./components/HomePage/HomePage";
 import ExercisePage from "./components/Exercises/Exercises";
+import RoutineForm from "./components/Routines/RoutineForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function App() {
           </Route>
 
           <Route  exact path="/home" >
-
+            <HomePage />
           </Route>
           <Route  exact path="/leaderboards" >
 
@@ -34,6 +35,10 @@ function App() {
 
           <Route  exact path="/exercises" >
             <ExercisePage />
+          </Route>
+
+          <Route  exact path="/routines/new" >
+            <RoutineForm />
           </Route>
 
         </Switch>
