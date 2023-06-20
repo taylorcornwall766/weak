@@ -3,12 +3,15 @@ import SignupFormPage from "../SignupFormPage"
 import OpenModalButton from "../OpenModalButton"
 import {useHistory, NavLink} from 'react-router-dom'
 import { login } from "../../store/session"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import * as sessionActions from "../../store/session"
 function LandingPage(){
     const dispatch = useDispatch()
     const history = useHistory()
-
+    const user = useSelector((state)=> state.session.user)
+    if (user){
+        history.push("")
+    }
     const demoLogin = async() =>{
         await dispatch(sessionActions.login("bobbie@aa.io", "password"))
         return history.push("/home")

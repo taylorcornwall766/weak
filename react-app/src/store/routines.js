@@ -34,7 +34,7 @@ export const editRoutineThunk = (routine) => async(dispatch) =>{
     const editRoutineResponse = await fetch(`/api/routines/${routine.id}/edit`, {
         method:"put",
         headers:{"Content-Type": "application/json"},
-        body: JSON.stringify(exercise),
+        body: JSON.stringify(routine),
     })
     const editRoutineData = await editRoutineResponse.json();
     if (editRoutineResponse.ok) {
@@ -48,7 +48,7 @@ export const postRoutineThunk = (routine) => async(dispatch) =>{
     const newRoutineResponse = await fetch(`/api/routines/new`,{
         method: "post",
         headers: {" Content-Type": "application/json" },
-        body: JSON.stringify(exercise),
+        body: JSON.stringify(routine),
     });
     const newRoutineData = await newRoutineResponse.json();
     if(newRoutineResponse.ok){
