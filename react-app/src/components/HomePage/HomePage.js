@@ -8,6 +8,7 @@ import * as sessionActions from "../../store/session"
 import { useEffect } from "react"
 import { getAllRoutinesThunk } from "../../store/routines"
 import RoutinesIndex from "../Routines/RoutinesIndex"
+import { getAllExercisesThunk } from "../../store/exercises"
 function HomePage(){
     const dispatch = useDispatch()
     const history = useHistory()
@@ -19,6 +20,7 @@ function HomePage(){
     useEffect(() => {
         // console.log("000000000001-1--1-1-1")
         dispatch(getAllRoutinesThunk())
+        dispatch(getAllExercisesThunk())
     }, [dispatch])
     if(!user){
         history.push("/")

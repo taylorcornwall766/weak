@@ -59,6 +59,8 @@ function CreateExerciseModal({setDetails}) {
                         value={name}
                         onChange={(e)=> setName(e.target.value)}
                         required
+                        minLength="3"
+                        maxLength="50"
                     />
                 </label>
                 <label>
@@ -67,6 +69,7 @@ function CreateExerciseModal({setDetails}) {
                         type="text"
                         placeholder='Write a detailed description of how to perform the exercise...'
                         maxLength={999}
+                        minLength="10"
                         value={description}
                         onChange={(e)=> setDescription(e.target.value)}
                         required

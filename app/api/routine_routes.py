@@ -1,17 +1,32 @@
 from flask import Blueprint, request
 from app.models.routines import Routine
+from app.models.routine_exercise import RoutineExercise
 from app.models.db import db
 from app.forms.routine_form import RoutineForm
+from app.forms.routine_exercise_form import RoutineExerciseForm
 from app.forms.edit_routine_form import EditRoutineForm
 from flask_login import login_required, current_user
 
 routine_routes = Blueprint("routine", __name__)
 
-@routine_routes.route("")
-def get_all_routines():
-    routines = Routine.query.all()
-    res = [routine.to_dict() for routine in routines]
-    return {"routines": res}
+@routine_routes.route("/<int:routine_id>/exercise/new", methods=["POST"])
+@login_required
+def post_routine_exercise(routine_id):
+    form = RoutineExerciseForm()
+    user_id = current_user.id
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        new_routine_exercise = RoutineExercise(
+            routine_id = form.data["routine_id"],
+            exercise_id = form.data["exercise_id"],
+            sets = form.data["sets"]
+        )
+        db.session.add(new_routine_exercise)
+        db.session.commit()
+        return new_routine_exercise.to_dict()
+    else:
+        return form.errors, 400
+
 
 @routine_routes.route("/new", methods=["POST"])
 @login_required
@@ -75,3 +90,9 @@ def edit_routine(routine_id):
         return edited_routine
     else:
         return form.errors, 400
+
+@routine_routes.route("")
+def get_all_routines():
+    routines = Routine.query.all()
+    res = [routine.to_dict() for routine in routines]
+    return {"routines": res}

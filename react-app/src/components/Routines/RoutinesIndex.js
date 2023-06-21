@@ -13,6 +13,7 @@ function RoutinesIndex() {
     return (
         <>
             <button onClick={()=>{history.push("/routines/new")}}>Create new Routine</button>
+            <h1>Routines</h1>
             {routinesArr.map((routine) => (
 
                 <RoutineTile routine={routine}/>
