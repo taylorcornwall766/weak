@@ -15,12 +15,14 @@ function ExercisePage() {
   // console.log(exercises)
   useEffect(() => {
     dispatch(getAllExercisesThunk());
-  }, [dispatch]); 
+  }, [dispatch]);
 
   const handleClick = (exercise) => {
     setDetails(exercise);
-    // console.log(exercise)
+    // posts[postId] = newPost
+    // setPosts({...posts})
   };
+  // obj.values(posts).map(())
   const muscleGroups = {
     "legs":[],
     "shoulder":[],

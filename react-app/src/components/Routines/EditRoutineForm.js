@@ -6,17 +6,9 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import { editRoutineThunk, getAllRoutinesThunk } from "../../store/routines";
 import { getAllExercisesThunk } from "../../store/exercises";
+import RoutineExerciseForm from "./RoutineExercise";
 
 const EditRoutineForm = () => {
-  // {
-  //     "name": "changes",
-  //     "description": "testing these out",
-  //     "muscle_group_one": "back",
-  //     "muscle_group_two": "bicep",
-  //     "muscle_group_three": null,
-  //     "muscle_group_four": null,
-  //     "muscle_group_five": null
-  // }
   const dispatch = useDispatch();
   const history = useHistory();
   const { routineId } = useParams();
@@ -25,9 +17,9 @@ const EditRoutineForm = () => {
     dispatch(getAllExercisesThunk());
   }, [dispatch]);
   const routines = useSelector((state) => state.routine);
-  const exercises = useSelector((state) => state.exercise)
-  const [exercisesObj, setExercisesObj] = useState({})
   const routine = routines[routineId];
+  const exercises = useSelector((state) => state.exercise);
+  const [exercisesObj, setExercisesObj] = useState({});
   const [name, setName] = useState(routine?.name || "");
   const [description, setDescription] = useState(routine?.description || "");
   const [muscleGroupOne, setMuscleGroupOne] = useState(
@@ -45,25 +37,34 @@ const EditRoutineForm = () => {
   const [muscleGroupFive, setMuscleGroupFive] = useState(
     routine?.muscle_group_five || ""
   );
+
   const [routineExercises, setRoutineExercises] = useState(
-    routine? Object.values(routine.routine_exercises) : []
-  )
+    routine ? Object.values(routine.routine_exercises) : []
+  );
   useEffect(() => {
-    if(routine){
-        setName(routine.name)
-        setDescription(routine.description)
-        setMuscleGroupOne(routine.muscleGroupOne)
-        setMuscleGroupTwo(routine.muscleGroupTwo || "")
-        setMuscleGroupThree(routine.muscleGroupThree || "")
-        setMuscleGroupFour(routine.muscleGroupFour || "")
-        setMuscleGroupFive(routine.muscleGroupFive || "")
-        setRoutineExercises(Object.values(routine.routine_exercises))
-        console.log(routineExercises)
+    if (routine) {
+      setName(routine.name);
+      setDescription(routine.description);
+      setMuscleGroupOne(routine.muscleGroupOne);
+      setMuscleGroupTwo(routine.muscleGroupTwo || "");
+      setMuscleGroupThree(routine.muscleGroupThree || "");
+      setMuscleGroupFour(routine.muscleGroupFour || "");
+      setMuscleGroupFive(routine.muscleGroupFive || "");
+      console.log(
+        "routine object values ->  ",
+        Object.values(routine.routine_exercises)
+      );
+      console.log("routine ex before : ", routineExercises);
+      const routineExArr = Object.values(routine.routine_exercises);
+      // console.log("routineExArr: ", routineExArr)
+      setRoutineExercises([...routineExArr]);
+      console.log("routine ex after : ", routineExercises);
+      // console.log("routineExercises ->  ",routineExercises)
     }
   }, [routine]);
   useEffect(() => {
-    if(Object.values(exercises).length){
-        setExercisesObj(exercises)
+    if (Object.values(exercises).length) {
+      setExercisesObj(exercises);
     }
   }, [exercises]);
   const [errors, setErrors] = useState({});
@@ -277,11 +278,18 @@ const EditRoutineForm = () => {
         <button type="submit">Edit Routine</button>
       </form>
       <h1>Routine Exercises</h1>
-      {routine && routineExercises.map((exercise) => {
-        <>
-            <p>asdf</p>
-        </>
-      })}
+      <RoutineExerciseForm
+        exercises={Object.values(exercisesObj)}
+      ></RoutineExerciseForm>
+      {routine &&
+        Object.values(routine.routine_exercises).map((exercise) => (
+          <>
+            <h3>{exercises[exercise.exerciseId].name}</h3>
+            <p>{exercise.sets} sets</p>
+            <p>{exercises[exercise.exerciseId].description}</p>
+            {/* <p>{exercise.primary} : sets</p> */}
+          </>
+        ))}
     </>
   );
 };
