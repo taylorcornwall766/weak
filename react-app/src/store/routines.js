@@ -10,22 +10,23 @@ const postRoutineExercise = (routineExercise) => {
   };
 };
 
-const postRoutineExerciseThunk = (routineExercise) => async (dispatch) => {
-  const routineExerciseResponse = await fetch(
-    `/api/routines/${routineExercise.routineId}/new`,
-    {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(routineExercise),
+export const postRoutineExerciseThunk =
+  (routineExercise) => async (dispatch) => {
+    const routineExerciseResponse = await fetch(
+      `/api/routines/${routineExercise.routine_id}/exercise/new`,
+      {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(routineExercise),
+      }
+    );
+    const newRoutineExerciseData = await routineExerciseResponse.json();
+    if (routineExerciseResponse.ok) {
+      dispatch(postRoutineExercise(newRoutineExerciseData));
+      return newRoutineExerciseData;
     }
-  );
-  const newRoutineExerciseData = await routineExerciseResponse.json();
-  if (routineExerciseResponse.ok) {
-    dispatch(postRoutineExercise(newRoutineExerciseData));
-    return newRoutineExerciseData;
-  }
-  return null;
-};
+    return null;
+  };
 
 // need to normalize routine exercises array in GET EDIT and POST
 const deleteRoutine = (routineId) => {
@@ -123,6 +124,11 @@ const initialState = {};
 const routineReducer = (state = initialState, action) => {
   let newState = {};
   switch (action.type) {
+    case POST_ROUTINE_EXERCISE:{
+        newState = {...state}
+        newState[action.payload.routineId].id = action.payload
+        return newState
+    }
     case GET_ALL_ROUTINES: {
       newState = { ...action.payload };
       return newState;

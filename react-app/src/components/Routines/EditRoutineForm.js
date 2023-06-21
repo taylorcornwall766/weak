@@ -17,6 +17,7 @@ const EditRoutineForm = () => {
     dispatch(getAllExercisesThunk());
   }, [dispatch]);
   const routines = useSelector((state) => state.routine);
+  const [routineTest, setRoutineTest] = useState(routines[routineId])
   const routine = routines[routineId];
   const exercises = useSelector((state) => state.exercise);
   const [exercisesObj, setExercisesObj] = useState({});
