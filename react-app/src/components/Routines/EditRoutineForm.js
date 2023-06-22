@@ -12,13 +12,18 @@ const EditRoutineForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { routineId } = useParams();
+  const user = useSelector((state) => state.session.user);
   useEffect(() => {
     dispatch(getAllRoutinesThunk());
     dispatch(getAllExercisesThunk());
+    // console.log("test")
   }, [dispatch]);
   const routines = useSelector((state) => state.routine);
-  const [routineTest, setRoutineTest] = useState(routines[routineId])
   const routine = routines[routineId];
+  if (routine && user.id !== routine.author.id) {
+    history.push("/home")
+  }
+  const [routineTest, setRoutineTest] = useState(routines[routineId]);
   const exercises = useSelector((state) => state.exercise);
   const [exercisesObj, setExercisesObj] = useState({});
   const [name, setName] = useState(routine?.name || "");
@@ -59,6 +64,7 @@ const EditRoutineForm = () => {
       const routineExArr = Object.values(routine.routine_exercises);
       // console.log("routineExArr: ", routineExArr)
       setRoutineExercises([...routineExArr]);
+      setRoutineTest(routine);
       console.log("routine ex after : ", routineExercises);
       // console.log("routineExercises ->  ",routineExercises)
     }
@@ -69,7 +75,6 @@ const EditRoutineForm = () => {
     }
   }, [exercises]);
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
   const muscleGroupsArr = [
     "back",
     "bicep",
@@ -115,7 +120,6 @@ const EditRoutineForm = () => {
       muscle_group_five: muscleGroupFive || null,
     };
     if (formValidated) {
-      setLoading(true);
       const newRoutineResponse = await dispatch(editRoutineThunk(newRoutine));
       history.push(`/routines/${newRoutineResponse.id}/edit`);
     }
@@ -281,9 +285,11 @@ const EditRoutineForm = () => {
       <h1>Routine Exercises</h1>
       <RoutineExerciseForm
         exercises={Object.values(exercisesObj)}
+        routineExercises={routineExercises}
+        setRoutineExercises={setRoutineExercises}
       ></RoutineExerciseForm>
-      {routine &&
-        Object.values(routine.routine_exercises).map((exercise) => (
+      {routineTest &&
+        routineExercises.map((exercise) => (
           <>
             <h3>{exercises[exercise.exerciseId].name}</h3>
             <p>{exercise.sets} sets</p>

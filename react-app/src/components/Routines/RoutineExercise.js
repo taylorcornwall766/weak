@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { postRoutineExerciseThunk } from "../../store/routines";
 import { useModal } from "../../context/Modal";
-const RoutineExerciseForm = ({ exercises, setRoutine}) => {
-  const {closeModal} = useModal()
+const RoutineExerciseForm = ({ exercises, routineExercises, setRoutineExercises}) => {
+//   const {closeModal} = useModal()
   const dispatch = useDispatch();
   const [openForm, setOpenForm] = useState(false);
   const [sets, setSets] = useState(0)
@@ -42,7 +42,9 @@ const RoutineExerciseForm = ({ exercises, setRoutine}) => {
             setSets(0)
             setExerciseId("")
             setErrors({})
-            closeModal()
+            setRoutineExercises([...routineExercises,newRoutine])
+
+            // closeModal()
         }
     }
 
