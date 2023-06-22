@@ -287,7 +287,8 @@ const EditRoutineForm = () => {
         routineExercises={routineExercises}
         setRoutineExercises={setRoutineExercises}
       ></RoutineExerciseForm>
-      {routineExercises.length > 0 && exercises.length > 0 &&
+      {/* exercises.length > 0 && */}
+      {routineExercises.length > 0 &&
         routineExercises.map((exercise) => (
           <>
             <h3>{exercises[exercise.exerciseId].name}</h3>

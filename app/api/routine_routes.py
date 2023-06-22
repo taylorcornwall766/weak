@@ -9,19 +9,6 @@ from flask_login import login_required, current_user
 
 routine_routes = Blueprint("routine", __name__)
 
-@routine_routes.route("/<int:routine_id>/exercise/<int:exercise_id>/delete", methods=["DELETE"])
-@login_required
-def delete_routine_exercise(routine_id, exercise_id):
-    routine_exercise = RoutineExercise.query.get(exercise_id)
-    routine = Routine.query.get(routine_id)
-    if routine_exercise is None:
-        return {'errors': 'routine exercise not found'}, 404
-    routine_dict = routine.to_dict()
-    if routine_dict["author"]["id"] is not int(current_user.id):
-        return {'errors': 'you can only delete routines you have posted!'}, 401
-    db.session.delete(routine_exercise)
-    db.session.commit()
-    return {'message': 'routine deleted'}
 
 @routine_routes.route("/<int:routine_id>/exercise/new", methods=["POST"])
 @login_required
@@ -40,6 +27,20 @@ def post_routine_exercise(routine_id):
         return new_routine_exercise.to_dict()
     else:
         return form.errors, 400
+    
+@routine_routes.route("/<int:routine_id>/exercise/<int:exercise_id>/delete", methods=["DELETE"])
+@login_required
+def delete_routine_exercise(routine_id, exercise_id):
+    routine_exercise = RoutineExercise.query.get(exercise_id)
+    routine = Routine.query.get(routine_id)
+    if routine_exercise is None:
+        return {'errors': 'routine exercise not found'}, 404
+    routine_dict = routine.to_dict()
+    if routine_dict["author"]["id"] is not int(current_user.id):
+        return {'errors': 'you can only delete routines you have posted!'}, 401
+    db.session.delete(routine_exercise)
+    db.session.commit()
+    return {'message': 'routine deleted'}
 
 
 @routine_routes.route("/new", methods=["POST"])
