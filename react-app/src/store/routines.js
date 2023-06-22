@@ -2,6 +2,31 @@ const GET_ALL_ROUTINES = "routines/getAllRoutines";
 const POST_ROUTINE = "routines/postRoutine";
 const DELETE_ROUTINE = "routines/deleteRoutine";
 const POST_ROUTINE_EXERCISE = "routines/postRoutineExercise";
+const DELETE_ROUTINE_EXERCISE = "routines/deleteRoutineExercise";
+
+const deleteRoutineExercise = (routineId, routineExerciseId) => {
+  return {
+    type: DELETE_ROUTINE_EXERCISE,
+    payload:{
+      routineId, routineExerciseId
+    }
+  }
+}
+
+export const deleteRoutineExerciseThunk = (routineId, routineExerciseId) => async (dispatch) =>{
+  const deleteExerciseResponse = await fetch(
+    `/api/routines/${routineId}/exercise/${routineExerciseId}/delete`,
+    {
+      method: "DELETE",
+    }
+  )
+  const deleteExerciseData = await deleteExerciseResponse.json();
+  if(deleteExerciseResponse.ok) {
+    dispatch(deleteRoutineExercise(routineId, routineExerciseId))
+    return `successfully deleted routine exercise ${routineExerciseId}`
+  }
+  return deleteExerciseData;
+}
 
 const postRoutineExercise = (routineExercise) => {
   return {
@@ -124,6 +149,11 @@ const initialState = {};
 const routineReducer = (state = initialState, action) => {
   let newState = {};
   switch (action.type) {
+    case DELETE_ROUTINE_EXERCISE:{
+      newState = {...state}
+      delete newState[action.payload.routineId][action.payload.routineExerciseId]
+      return newState
+    }
     case POST_ROUTINE_EXERCISE:{
         newState = {...state}
         newState[action.payload.routineId].id = action.payload

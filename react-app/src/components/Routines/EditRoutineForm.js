@@ -7,6 +7,8 @@ import {
 import { editRoutineThunk, getAllRoutinesThunk } from "../../store/routines";
 import { getAllExercisesThunk } from "../../store/exercises";
 import RoutineExerciseForm from "./RoutineExercise";
+import OpenModalButton from "../OpenModalButton";
+import RoutineExerciseDeleteModal from "./DeleteRoutineExerciseModal";
 
 const EditRoutineForm = () => {
   const dispatch = useDispatch();
@@ -23,7 +25,6 @@ const EditRoutineForm = () => {
   if (routine && user.id !== routine.author.id) {
     history.push("/home")
   }
-  const [routineTest, setRoutineTest] = useState(routines[routineId]);
   const exercises = useSelector((state) => state.exercise);
   const [exercisesObj, setExercisesObj] = useState({});
   const [name, setName] = useState(routine?.name || "");
@@ -44,9 +45,7 @@ const EditRoutineForm = () => {
     routine?.muscle_group_five || ""
   );
 
-  const [routineExercises, setRoutineExercises] = useState(
-    routine ? Object.values(routine.routine_exercises) : []
-  );
+  const [routineExercises, setRoutineExercises] = useState([]);
   useEffect(() => {
     if (routine) {
       setName(routine.name);
@@ -64,7 +63,7 @@ const EditRoutineForm = () => {
       const routineExArr = Object.values(routine.routine_exercises);
       // console.log("routineExArr: ", routineExArr)
       setRoutineExercises([...routineExArr]);
-      setRoutineTest(routine);
+    //   setRoutineTest(routine);
       console.log("routine ex after : ", routineExercises);
       // console.log("routineExercises ->  ",routineExercises)
     }
@@ -280,7 +279,7 @@ const EditRoutineForm = () => {
             </select>
           </label>
         )}
-        <button type="submit">Edit Routine</button>
+        <button type="submit">Save Changes</button>
       </form>
       <h1>Routine Exercises</h1>
       <RoutineExerciseForm
@@ -288,12 +287,16 @@ const EditRoutineForm = () => {
         routineExercises={routineExercises}
         setRoutineExercises={setRoutineExercises}
       ></RoutineExerciseForm>
-      {routineTest &&
+      {routineExercises.length > 0 && exercises.length > 0 &&
         routineExercises.map((exercise) => (
           <>
             <h3>{exercises[exercise.exerciseId].name}</h3>
             <p>{exercise.sets} sets</p>
             <p>{exercises[exercise.exerciseId].description}</p>
+            <OpenModalButton
+                classname="exercise-modal" buttonText="delete"
+                modalComponent={<RoutineExerciseDeleteModal routineId={routineId}exercise={exercise} routineExercises={routineExercises} setRoutineExercises={setRoutineExercises}/>}
+            />
             {/* <p>{exercise.primary} : sets</p> */}
           </>
         ))}
