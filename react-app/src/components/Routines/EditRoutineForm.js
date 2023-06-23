@@ -27,6 +27,7 @@ const EditRoutineForm = () => {
   }
   const exercises = useSelector((state) => state.exercise);
   const [exercisesObj, setExercisesObj] = useState({});
+//   change to on submit
   const [name, setName] = useState(routine?.name || "");
   const [description, setDescription] = useState(routine?.description || "");
   const [muscleGroupOne, setMuscleGroupOne] = useState(
@@ -118,6 +119,9 @@ const EditRoutineForm = () => {
       muscle_group_four: muscleGroupFour || null,
       muscle_group_five: muscleGroupFive || null,
     };
+    console.log(formValidated)
+    console.log(errors)
+    console.log("mg1: ", muscleGroupOne)
     if (formValidated) {
       const newRoutineResponse = await dispatch(editRoutineThunk(newRoutine));
       history.push(`/routines/${newRoutineResponse.id}/edit`);

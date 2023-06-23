@@ -10,6 +10,7 @@ import HomePage from "./components/HomePage/HomePage";
 import ExercisePage from "./components/Exercises/Exercises";
 import RoutineForm from "./components/Routines/RoutineForm";
 import EditRoutineForm from "./components/Routines/EditRoutineForm";
+import ManageRoutines from "./components/Routines/Refactor/ManageRoutines";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,10 @@ function App() {
 
           <Route exact path="/routines/:routineId/edit">
             <EditRoutineForm />
+          </Route>
+
+          <Route exact path="/routines/:routineId/edit/test">
+            <ManageRoutines />
           </Route>
 
         </Switch>
