@@ -19,7 +19,7 @@ const RoutineTile = ({routine}) => {
                 {routine.muscle_group_five && <li>{routine.muscle_group_five}</li>}
             </ul>
             <p>{routine.author.lastName}, {routine.author.firstName}</p>
-            {user.id == routine.author.id && (
+            {user && user.id == routine.author.id && (
                 <>
                 <OpenModalButton
                     className="exercise-modal"

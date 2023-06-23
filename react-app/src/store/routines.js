@@ -165,7 +165,7 @@ const routineReducer = (state = initialState, action) => {
     }
     case POST_ROUTINE: {
       newState = { ...state };
-      newState[action.payload.id] = action.payload;
+      newState[action.payload.id] = {...action.payload, "highlight":true};
       return newState;
     }
     case DELETE_ROUTINE: {

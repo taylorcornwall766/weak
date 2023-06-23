@@ -23,11 +23,11 @@ const EditRoutineForm = () => {
   const routines = useSelector((state) => state.routine);
   const routine = routines[routineId];
   if (routine && user.id !== routine.author.id) {
-    history.push("/home")
+    history.push("/home");
   }
   const exercises = useSelector((state) => state.exercise);
   const [exercisesObj, setExercisesObj] = useState({});
-//   change to on submit
+  //   change to on submit
   const [name, setName] = useState(routine?.name || "");
   const [description, setDescription] = useState(routine?.description || "");
   const [muscleGroupOne, setMuscleGroupOne] = useState(
@@ -51,11 +51,11 @@ const EditRoutineForm = () => {
     if (routine) {
       setName(routine.name);
       setDescription(routine.description);
-      setMuscleGroupOne(routine.muscleGroupOne);
-      setMuscleGroupTwo(routine.muscleGroupTwo || "");
-      setMuscleGroupThree(routine.muscleGroupThree || "");
-      setMuscleGroupFour(routine.muscleGroupFour || "");
-      setMuscleGroupFive(routine.muscleGroupFive || "");
+      setMuscleGroupOne(routine.muscle_group_one);
+      setMuscleGroupTwo(routine.muscle_group_two || "");
+      setMuscleGroupThree(routine.muscle_group_three || "");
+      setMuscleGroupFour(routine.muscle_group_four || "");
+      setMuscleGroupFive(routine.muscle_group_five || "");
       console.log(
         "routine object values ->  ",
         Object.values(routine.routine_exercises)
@@ -64,7 +64,7 @@ const EditRoutineForm = () => {
       const routineExArr = Object.values(routine.routine_exercises);
       // console.log("routineExArr: ", routineExArr)
       setRoutineExercises([...routineExArr]);
-    //   setRoutineTest(routine);
+      //   setRoutineTest(routine);
       console.log("routine ex after : ", routineExercises);
       // console.log("routineExercises ->  ",routineExercises)
     }
@@ -118,13 +118,14 @@ const EditRoutineForm = () => {
       muscle_group_three: muscleGroupThree || null,
       muscle_group_four: muscleGroupFour || null,
       muscle_group_five: muscleGroupFive || null,
+      id: routineId
     };
-    console.log(formValidated)
-    console.log(errors)
-    console.log("mg1: ", muscleGroupOne)
+    console.log(formValidated);
+    console.log(errors);
+    console.log("mg1: ", muscleGroupOne);
     if (formValidated) {
       const newRoutineResponse = await dispatch(editRoutineThunk(newRoutine));
-      history.push(`/routines/${newRoutineResponse.id}/edit`);
+      history.push(`/home`);
     }
   };
   const optionLogic = (
@@ -299,8 +300,16 @@ const EditRoutineForm = () => {
             <p>{exercise.sets} sets</p>
             <p>{exercises[exercise.exerciseId].description}</p>
             <OpenModalButton
-                classname="exercise-modal" buttonText="delete"
-                modalComponent={<RoutineExerciseDeleteModal routineId={routineId}exercise={exercise} routineExercises={routineExercises} setRoutineExercises={setRoutineExercises}/>}
+              classname="exercise-modal"
+              buttonText="delete"
+              modalComponent={
+                <RoutineExerciseDeleteModal
+                  routineId={routineId}
+                  exercise={exercise}
+                  routineExercises={routineExercises}
+                  setRoutineExercises={setRoutineExercises}
+                />
+              }
             />
             {/* <p>{exercise.primary} : sets</p> */}
           </>

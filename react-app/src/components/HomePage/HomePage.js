@@ -21,6 +21,7 @@ function HomePage(){
         // console.log("000000000001-1--1-1-1")
         dispatch(getAllRoutinesThunk())
         dispatch(getAllExercisesThunk())
+        // [dispatch]
     }, [dispatch])
     if(!user){
         history.push("/")
