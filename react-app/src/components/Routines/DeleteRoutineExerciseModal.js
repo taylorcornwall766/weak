@@ -7,18 +7,21 @@ import { useParams } from 'react-router-dom';
 function RoutineExerciseDeleteModal({exercise, routineId, routineExercises, setRoutineExercises,routExId}) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
+    console.log("routineId", routineId)
+    console.log("routExId", routExId)
+    console.log("exercise", exercise)
    const confirmDelete = async(e) =>{
     e.preventDefault()
     // const data = await dispatch(deleteRoutineExerciseThunk(routineId, exercise.id))
-    const data = await dispatch(deleteRoutineExerciseThunk(routineId, routExId))
+    const data = await dispatch(deleteRoutineExerciseThunk(routineId, exercise.id))
     if(data.errors){
         return alert("something went wrong!")
     }
-    // const newRoutineExercises = routineExercises.filter((ex) => ex.id !== exercise.id);
-    // setRoutineExercises(newRoutineExercises)
+    const newRoutineExercises = routineExercises.filter((ex) => ex.id !== exercise.id);
+    setRoutineExercises(newRoutineExercises)
 
     return closeModal()
-
+    
    }
 
     return (
