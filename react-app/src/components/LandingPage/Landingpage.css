@@ -1,0 +1,137 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  body {
+    /* background-color: #4b43db; */
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+
+  h2.signup-heading {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .signup {
+    background-color: #ffffff;
+    padding: 10px 40px;
+    padding-bottom: 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.241);
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+
+  form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Blue color */
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  form button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover */
+  }
+
+  button {
+    margin-top:10px;
+    display: block;
+    margin-bottom: -5px;
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    /* color: #ffffff; */
+    color: #000000;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  button:hover {
+    color: #0056b3;
+  }
+
+  .errors{
+    color:red;
+    /* text-overflow: wrap; */
+  }
+
+  html{
+    /* background-color:black */
+  }
+  #modal-content {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: 0 auto;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #modal-content h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #modal-content label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  #modal-content input[type="text"],
+  #modal-content input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+
+  #modal-content button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #modal-content button[type="submit"]:hover {
+    background-color: #0056b3;
+  }

@@ -5,6 +5,7 @@ import {useHistory, NavLink} from 'react-router-dom'
 import { login } from "../../store/session"
 import { useDispatch, useSelector } from "react-redux"
 import * as sessionActions from "../../store/session"
+import "./Landingpage.css"
 function LandingPage(){
     const dispatch = useDispatch()
     const history = useHistory()
@@ -18,7 +19,7 @@ function LandingPage(){
     }
     return (
         <div className="landingpage container">
-            <h1>LOGO</h1>
+            <img className="logo" src="https://cdn.discordapp.com/attachments/1117972822686433291/1122216607800889345/logo-black-removebg-preview.png"></img>
             <div className="signup container">
             <SignupFormPage></SignupFormPage>
             </div>
