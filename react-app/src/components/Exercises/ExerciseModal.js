@@ -60,7 +60,7 @@ function CreateExerciseModal({setDetails}) {
                         onChange={(e)=> setName(e.target.value)}
                         required
                         minLength="3"
-                        maxLength="49"
+                        maxLength="39"
                     />
                 </label>
                 <label>
