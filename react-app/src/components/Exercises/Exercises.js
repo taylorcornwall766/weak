@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import CreateExerciseModal from "./ExerciseModal";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal.js";
 import EditExerciseModal from "./EditExerciseModal";
+import "./Exercises.css"
 function ExercisePage() {
   const dispatch = useDispatch();
   // const history = useHistory()
@@ -86,17 +87,21 @@ function ExercisePage() {
 //   console.log(muscleGroups)
 
   return (
-    <>
+    <div className="homepage">
       <h1>Exercises</h1>
       <OpenModalButton
         className="exercise-modal"
         buttonText="Create Exercise"
         modalComponent={<CreateExerciseModal setDetails={setDetails}/>}
       />
-      <div className="details-div">
+      <div className={`details-div ${details?"": "hidden"}`}>
 
         {details &&
-            <>
+            <div className="details-container">
+            <div className="images-container">
+                <img className="exercise-img" src={details.startPhoto? details.startPhoto: "https://cdn.discordapp.com/attachments/1117972822686433291/1122772424728006747/male-anatomy-view.png"}></img>
+                <img className="exercise-img" src={details.endPhoto? details.endPhoto : "https://cdn.discordapp.com/attachments/1117972822686433291/1122772424728006747/male-anatomy-view.png"}></img>
+            </div>
             <h2>{details.name}:</h2>
         <p>{details.description}</p>
         <p>Muscle Groups:</p>
@@ -106,17 +111,17 @@ function ExercisePage() {
             {details.tertiaryMuscle&&<li>{details.tertiaryMuscle}</li>}
         </ul>
         <p>{`${details.author.lastName}, ${details.author.firstName}`}</p>
-        </>}
+        </div >}
         {
           details && details.author.id == user.id &&
           <>
           <OpenModalButton
-            className="delete-modal"
+            className="delete"
             buttonText="Delete"
             modalComponent={<ConfirmDeleteModal exerciseId={details.id} name="Exercise" setDetails={setDetails}/>}
           />
           <OpenModalButton
-            className="edit-modal"
+            className="edit"
             buttonText="Edit"
             modalComponent={<EditExerciseModal setDetails={setDetails} details={details}/>}
           />
@@ -190,7 +195,7 @@ function ExercisePage() {
         </div>
 
 
-    </>
+    </div>
   );
 }
 export default ExercisePage;

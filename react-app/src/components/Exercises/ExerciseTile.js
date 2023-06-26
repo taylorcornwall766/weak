@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom'
 const ExerciseTile = ({exercise, handleClick}) => {
     return(
         <>
-        <a onClick={()=>handleClick(exercise)}>{exercise.name}</a>
+        <a href="#top"className="muscle-group" onClick={()=>handleClick(exercise)}>{exercise.name}</a>
         </>
     )
 }

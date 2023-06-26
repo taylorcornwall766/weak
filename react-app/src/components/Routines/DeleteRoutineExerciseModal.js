@@ -21,14 +21,16 @@ function RoutineExerciseDeleteModal({exercise, routineId, routineExercises, setR
     setRoutineExercises(newRoutineExercises)
 
     return closeModal()
-    
+
    }
 
     return (
         <>
             <h1 className="delete-modal">{`Are you sure you want to remove this exercise?`}</h1>
-            <button onClick={(e)=>confirmDelete(e)}>Confirm Delete</button>
-            <button onClick={()=>closeModal()}>Cancel</button>
+            <div className="button-container">
+                <button className="delete modal-button"onClick={(e)=>confirmDelete(e)}>Confirm Delete</button>
+                <button className="edit modal-button" onClick={()=>closeModal()}>Cancel</button>
+            </div>
         </>
     )
 

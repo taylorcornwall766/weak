@@ -48,8 +48,8 @@ function EditExerciseModal({setDetails, details}) {
     }
     return (
         <>
-            <h1 className="exercise-modal">Edit {name}</h1>
-            <p>Fields marked with an `*` are required.</p>
+            <h1 className="">{name}</h1>
+            <p className="fields">Fields marked with an `*` are required.</p>
             <form onSubmit={handleSubmit}>
                 <label>
                     Description *
@@ -107,6 +107,8 @@ function EditExerciseModal({setDetails, details}) {
                         value={startPhoto}
                         onChange={(e)=> setStartPhoto(e.target.value)}
                         placeholder='Image.url'
+                        pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)"
+
                     />
                 </label>
                 <label>
@@ -116,10 +118,12 @@ function EditExerciseModal({setDetails, details}) {
                         value={endPhoto}
                         onChange={(e)=> setEndPhoto(e.target.value)}
                         placeholder='Image.url'
+                        pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)"
+
                     />
                 </label>
 
-                <button className ="form button">
+                <button className ="exercise-modal center" id="center2">
                     Save Changes
                 </button>
 

@@ -8,17 +8,17 @@ const RoutineTile = ({routine}) => {
     const user = useSelector((state) => state.session.user)
 
     return(
-        <div className="routineTile">
-            <h2>{routine.name}</h2>
-            <p>{routine.description}</p>
-            <ul>
+        <div className="routine-tile">
+            <h2 className="routine-header">{routine.name}</h2>
+            <p className="routine-description">{routine.description}</p>
+            <ul className="routine-muscles">
                 <li>{routine.muscle_group_one}</li>
                 {routine.muscle_group_two && <li>{routine.muscle_group_two}</li>}
                 {routine.muscle_group_three && <li>{routine.muscle_group_three}</li>}
                 {routine.muscle_group_four && <li>{routine.muscle_group_four}</li>}
                 {routine.muscle_group_five && <li>{routine.muscle_group_five}</li>}
             </ul>
-            <p>{routine.author.lastName}, {routine.author.firstName}</p>
+            <p className="routine-author">{routine.author.lastName}, {routine.author.firstName}</p>
             {user && user.id == routine.author.id && (
                 <div className="routine-button-container">
                 <OpenModalButton

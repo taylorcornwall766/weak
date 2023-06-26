@@ -9,7 +9,7 @@ import { getAllExercisesThunk } from "../../store/exercises";
 import RoutineExerciseForm from "./RoutineExercise";
 import OpenModalButton from "../OpenModalButton";
 import RoutineExerciseDeleteModal from "./DeleteRoutineExerciseModal";
-
+import "./EditRoutine.css"
 const EditRoutineForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -153,10 +153,10 @@ const EditRoutineForm = () => {
     );
   };
   return (
-    <>
+    <div className="edit-routine-container">
       <h1 className="routine-form">Edit Routine: {name}</h1>
-      <p>Fields marked with an `*` are required.</p>
-      <form onSubmit={handleSubmit}>
+      <p className="routine-form">Fields marked with an `*` are required.</p>
+      <form onSubmit={handleSubmit} className="edit-routine-form">
         <label>
           Name *
           <input
@@ -300,7 +300,7 @@ const EditRoutineForm = () => {
             <p>{exercise.sets} sets</p>
             <p>{exercises[exercise.exerciseId].description}</p>
             <OpenModalButton
-              classname="exercise-modal"
+              className="delete"
               buttonText="delete"
               modalComponent={
                 <RoutineExerciseDeleteModal
@@ -314,7 +314,7 @@ const EditRoutineForm = () => {
             {/* <p>{exercise.primary} : sets</p> */}
           </>
         ))}
-    </>
+    </div>
   );
 };
 export default EditRoutineForm;

@@ -99,10 +99,10 @@ const RoutineForm = () => {
     );
   };
   return (
-    <>
+    <div className="edit-routine-container">
       <h1 className="routine-form">Create new Routine</h1>
-      <p>Fields marked with an `*` are required.</p>
-      <form onSubmit={handleSubmit}>
+      <p className="routine-form">Fields marked with an `*` are required.</p>
+      <form className="edit-routine-form" onSubmit={handleSubmit}>
         <label>
           Name *
           <input
@@ -241,7 +241,7 @@ const RoutineForm = () => {
         }
         <button type="submit">Create Routine</button>
       </form>
-    </>
+    </div>
   );
 };
 export default RoutineForm;

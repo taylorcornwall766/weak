@@ -49,7 +49,7 @@ function CreateExerciseModal({setDetails}) {
     }
     return (
         <>
-            <h1 className="exercise-modal">Create Exercise</h1>
+            <h1 className="">Create Exercise</h1>
             <p>Fields marked with an `*` are required.</p>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -120,6 +120,7 @@ function CreateExerciseModal({setDetails}) {
                         value={startPhoto}
                         onChange={(e)=> setStartPhoto(e.target.value)}
                         placeholder='Image.url'
+                        pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)"
                     />
                 </label>
                 <label>
@@ -129,10 +130,11 @@ function CreateExerciseModal({setDetails}) {
                         value={endPhoto}
                         onChange={(e)=> setEndPhoto(e.target.value)}
                         placeholder='Image.url'
+                        pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)"
                     />
                 </label>
 
-                <button className ="form button">
+                <button className ="exercise-modal" id="center1">
                     Create Exercise
                 </button>
 

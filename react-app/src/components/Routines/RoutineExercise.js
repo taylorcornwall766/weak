@@ -52,7 +52,7 @@ const RoutineExerciseForm = ({ exercises, routineExercises, setRoutineExercises}
   return (
     <>
       {!openForm ? (
-        <button onClick={() => setOpenForm(!openForm)}>Add Exercise</button>
+        <button className="add-exercise-routine"onClick={() => setOpenForm(!openForm)}>Add Exercise</button>
       ) : (
         <div className="form container">
             <h2>Add Exercise to Routine</h2>
@@ -87,7 +87,7 @@ const RoutineExerciseForm = ({ exercises, routineExercises, setRoutineExercises}
                         onChange={(e)=>{setSets(e.target.value>50? 50: e.target.value)}}
                     />
                 </label>
-                <button type="submit">Add</button>
+                <button className="add-exercise-routine" type="submit">Add</button>
             </form>
         </div >
       )}
