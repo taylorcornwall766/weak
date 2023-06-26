@@ -1,0 +1,110 @@
+.homepage{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+}
+
+*{
+    word-wrap: break-word;
+}
+.homepage *{
+    max-width: 100%;
+}
+
+/*
+.workout-button{
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 0;
+    color: black;
+    background-color: #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    transition: color 0.3s ease;
+    justify-self: center;
+}
+.workout-button:hover{
+    background-color: #0056b3;
+    color: white;
+} */
+.workout-button {
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 0;
+    color: white;
+    background-image: linear-gradient(to bottom, #007bff, #0056b3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .workout-button:hover {
+    background-image: linear-gradient(to bottom, #0056b3, #002d5a);
+    transform: scale(1.05);
+    color:white;
+  }
+  .routine-tile-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .routine-button-container{
+    display: flex;
+    flex-direction: row;
+
+  }
+  .edit {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    /* font-weight: bold; */
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .delete{
+    color: #007bff;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+  .delete:hover{
+    color: red;
+    transform: scale(1.05);
+  }
+
+  .edit:hover {
+    background-color: #0056b3;
+    color: white;
+    transform: scale(1.05);
+  }
+  .new-routine-button{
+    width: fit-content;
+  }
+  .routines-h1{
+    padding-bottom: 0px;
+  }

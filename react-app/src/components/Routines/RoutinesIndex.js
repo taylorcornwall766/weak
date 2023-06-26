@@ -12,13 +12,16 @@ function RoutinesIndex() {
 
     return (
         <>
-            <button onClick={()=>{history.push("/routines/new")}}>Create new Routine</button>
-            <h1>Routines</h1>
-            {routinesArr.map((routine) => (
+            <h1 className="routines-h1">Routines</h1>
+            <button className="new-routine-button"onClick={()=>{history.push("/routines/new")}}>New Routine</button>
+            <div className="routine-tile-container">
 
-                <RoutineTile routine={routine}/>
-                )
-            )}
+                {routinesArr.map((routine) => (
+
+                    <RoutineTile routine={routine}/>
+                    )
+                )}
+            </div>
         </>
     )
 }

@@ -29,9 +29,7 @@ function HomePage(){
     }
     return (
         <div className="homepage">
-            <div className="start-workout">
-                <button className="workout-button">Start Workout</button>
-            </div>
+                <button className="workout-button"onClick={(e)=> alert("Feature coming soon...")}>START WORKOUT</button>
             <RoutinesIndex />
         </div>
     )

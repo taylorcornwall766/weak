@@ -20,14 +20,14 @@ const RoutineTile = ({routine}) => {
             </ul>
             <p>{routine.author.lastName}, {routine.author.firstName}</p>
             {user && user.id == routine.author.id && (
-                <>
+                <div className="routine-button-container">
                 <OpenModalButton
-                    className="exercise-modal"
-                    buttonText="Delete Routine"
+                    className="delete routine-button"
+                    buttonText="DELETE"
                     modalComponent={<RoutineDeleteModal routine={routine}/>}
                     />
-                <button onClick={()=>history.push(`/routines/${routine.id}/edit`)}>Edit</button>
-                </>
+                <button className="edit routine-button"onClick={()=>history.push(`/routines/${routine.id}/edit`)}>EDIT</button>
+                </div>
             )}
         </div>
     )

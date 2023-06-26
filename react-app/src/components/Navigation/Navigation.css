@@ -17,6 +17,7 @@ li {
   color: white;
 }
 
+
 .nav-links{
   display: flex;
   flex-direction: row;
@@ -24,6 +25,7 @@ li {
   align-items: center;
   height: 100%;
   text-align: center;
+
 }
 
 .navbar-right {
@@ -36,9 +38,18 @@ li {
 }
 
 button.profile-button {
-  margin-top: 0px;
-  /* margin-right: 10px; */
-  /* margin-left: 15px; */
+  margin-top: -4px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+i.profile{
+  font-size: 24px;
+  color: white;
+}
+
+i.black{
+  color:black;
 }
 
 ul.navbar{
@@ -60,8 +71,8 @@ ul.navbar{
 
 .profile-dropdown {
   position: absolute;
-  top: 70px;
-  right: 42px;
+  top: 55px;
+  right: 5px;
   z-index: 9999;
   width: fit-content;
   background-color: #fff;
