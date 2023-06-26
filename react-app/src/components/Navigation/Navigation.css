@@ -5,3 +5,98 @@
 .hidden {
   display: none;
 }
+
+li {
+  list-style-type: none;
+}
+
+.a-navlink{
+  text-decoration: none;
+  margin-left: 20px;
+  justify-self: flex-end;
+  color: white;
+}
+
+.nav-links{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.navbar-right {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+button.profile-button {
+  margin-top: 0px;
+  /* margin-right: 10px; */
+  /* margin-left: 15px; */
+}
+
+ul.navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0px;
+  background-color: #007bff;
+  padding: 0px;
+  height: 50px;
+
+}
+.navbar-logo{
+  width:auto;
+  height: 25px;
+  margin-left: 25px;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 70px;
+  right: 42px;
+  z-index: 9999;
+  width: fit-content;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block;
+  padding: 0px;
+}
+
+.profile-dropdown li {
+  padding: 10px;
+  color: #333;
+}
+
+.profile-dropdown li:hover {
+  background-color: #f5f5f5;
+}
+
+.hidden{
+  display: none;
+}
+
+.logout-button{
+  margin: 0 0 0 0;
+}
+
+* {
+  word-wrap: break-word;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links > .active{
+  color: black;
+}

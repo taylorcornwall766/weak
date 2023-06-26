@@ -28,7 +28,7 @@ function LandingPage(){
             buttonText='Already have an account? Log in'
             modalComponent={<LoginFormModal/>}
             />
-            <button onClick={demoLogin}>
+            <button className="demo" onClick={demoLogin}>
                 Demo Login
             </button>
         </div>

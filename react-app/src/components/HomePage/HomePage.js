@@ -9,6 +9,7 @@ import { useEffect } from "react"
 import { getAllRoutinesThunk } from "../../store/routines"
 import RoutinesIndex from "../Routines/RoutinesIndex"
 import { getAllExercisesThunk } from "../../store/exercises"
+import "./HomePage.css"
 function HomePage(){
     const dispatch = useDispatch()
     const history = useHistory()
@@ -27,8 +28,10 @@ function HomePage(){
         history.push("/")
     }
     return (
-        <div className="homepage container">
-            <h1>LOGO</h1>
+        <div className="homepage">
+            <div className="start-workout">
+                <button className="workout-button">Start Workout</button>
+            </div>
             <RoutinesIndex />
         </div>
     )

@@ -7,22 +7,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
   }
 
   body {
     /* background-color: #4b43db; */
     background-color: #f2f2f2;
-    padding: 20px;
+    padding: 0px;
   }
 
 
-  h2.signup-heading {
-    font-size: 24px;
+  h1.signup-heading {
+    font-size: 26px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
+  img.logo{
+    height: 125px
+  }
   .signup {
     background-color: #ffffff;
     padding: 10px 40px;
@@ -35,7 +38,7 @@
 
   form label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   input {
@@ -49,7 +52,7 @@
   form button[type="submit"] {
     width: 100%;
     padding: 10px;
-    background-color: #007bff; /* Blue color */
+    background-color: #007bff;
     color: #ffffff;
     border: none;
     border-radius: 3px;
@@ -59,7 +62,7 @@
   }
 
   form button[type="submit"]:hover {
-    background-color: #0056b3; /* Darker shade of blue on hover */
+    background-color: #0056b3;
   }
 
   button {
@@ -105,6 +108,9 @@
     text-align: center;
     margin-bottom: 20px;
   }
+  h1.login-head {
+    margin-top: 0;
+}
 
   #modal-content label {
     display: block;
@@ -134,4 +140,8 @@
 
   #modal-content button[type="submit"]:hover {
     background-color: #0056b3;
+  }
+
+  .demo {
+    padding-bottom: 10px;
   }
