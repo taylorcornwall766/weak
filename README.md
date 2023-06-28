@@ -1,14 +1,51 @@
-# Flask React Project
+# Weak log
 
-This is the starter for the Flask React project.
+Weak log is a workout logging and tracking web app. The gym has become a more social place lately. Weak log wants to provide a service where gym goers can track and share their progress in the gym.
+
+Checkout [Weak log](https://weak-log.onrender.com/)
+
+## Index
+
+[MVP Feature List](https://github.com/taylorcornwall766/weak/wiki/Feature-List) | 
+[Database Scheme](https://github.com/taylorcornwall766/weak/wiki/Schema) | 
+[User Stories](https://github.com/taylorcornwall766/weak/wiki/User-Stories) | 
+[Wire Frames](https://github.com/taylorcornwall766/weak/wiki/Wireframes) | 
+
+## Technologies Used
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
+## Landing Page
+![landing](https://github.com/taylorcornwall766/weak/assets/115431083/e7f5d6dd-e4f6-4f85-8f4a-d51843d4c265)
+
+
+
+## Exercises
+![exercises](https://github.com/taylorcornwall766/weak/assets/115431083/341cd5b5-fff8-4c35-83d1-eab6637d3c0f)![exercises cont](https://github.com/taylorcornwall766/weak/assets/115431083/798589e3-01a3-44ab-8ea3-0364f38ebcea)
+
+
+
+
+## Home Page (Routines)
+![home page](https://github.com/taylorcornwall766/weak/assets/115431083/0e63e3f1-4480-4439-b784-3bd9d1d0a56c)
+
+
+## Edit Routine and Add Routine Exercises
+![manage routine](https://github.com/taylorcornwall766/weak/assets/115431083/b815c48d-f739-40f2-ab3c-1eed5c9f3437)
+
 
 ## Getting started
-1. Clone this repository (only this branch)
+1. Clone this repository [Weak Log](https://github.com/taylorcornwall766/weak)
+   
+2. Install dependencies in frontend and backend with a terminal for each then run the following:
 
-2. Install dependencies
-
+      In the root of your directory:
       ```bash
       pipenv install -r requirements.txt
+      ```
+      In ./react-app:
+      ```bash
+      npm install
       ```
 
 3. Create a **.env** file based on the example with proper settings for your
@@ -21,7 +58,7 @@ This is the starter for the Flask React project.
    `SCHEMA` with a unique name, **making sure you use the snake_case
    convention**.
 
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+6. Get into your pipenv, migrate your database, seed your database, and run your Flask app from your root directory
 
    ```bash
    pipenv shell
@@ -39,7 +76,11 @@ This is the starter for the Flask React project.
    flask run
    ```
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+8. To run the frontend from the ./react-app directory run:
+      ```bash
+      npm start
+      ```
+        
 
 
 ## Deployment through Render.com
