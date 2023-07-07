@@ -23,6 +23,9 @@ class Exercise(db.Model):
     exercise_routine_exercise = db.relationship(
         "RoutineExercise", back_populates='routine_exercise_exercise'
     )
+    exercise_workout_exercise = db.relationship(
+        "WorkoutExercise", back_populates='workout_exercise_exercise'
+    )
 
     def to_dict(self):
         return {

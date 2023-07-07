@@ -54,3 +54,5 @@ class User(db.Model, UserMixin):
 
     exercise = db.relationship('Exercise', cascade="all, delete-orphan", back_populates='authorId')
     routine = db.relationship('Routine', cascade="all, delete-orphan", back_populates='routineAuthorId')
+    workouts = db.relationship('Workout', cascade="all, delete-orphan",
+    back_populates='workoutAuthorId')
