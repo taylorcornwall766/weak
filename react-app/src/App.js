@@ -10,6 +10,7 @@ import HomePage from "./components/HomePage/HomePage";
 import ExercisePage from "./components/Exercises/Exercises";
 import RoutineForm from "./components/Routines/RoutineForm";
 import EditRoutineForm from "./components/Routines/EditRoutineForm";
+import WorkoutForm from "./components/WorkoutForm/WorkoutForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,10 @@ function App() {
 
           <Route exact path="/routines/new">
             <RoutineForm />
+          </Route>
+
+          <Route exact path="/workouts/:workoutId/edit">
+            < WorkoutForm/>
           </Route>
 
           <Route exact path="/routines/:routineId/edit">

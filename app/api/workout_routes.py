@@ -93,3 +93,25 @@ def delete_workout_exercise(workout_id, workout_exercise_id):
     db.session.delete(exercise_to_delete)
     db.session.commit()
     return {'message': 'workout exercise deleted'}
+
+@workout_routes.route("/<int:workout_id>/exercises/<int:workout_exercise_id>/update", methods=["PUT"])
+@login_required
+def update_workout_exercise(workout_id, workout_exercise_id):
+    workout = Workout.query.get(workout_id)
+    if workout is None:
+        return {'errors':'workout not found'}, 404
+    if workout.author_id is not int(current_user.id):
+        return {'errors': 'you can only delete exercises from workouts you have created!'}, 401
+    exercise_to_edit = WorkoutExercise.query.get(workout_exercise_id)
+    if exercise_to_edit is None:
+        return {'errors': 'exercise not found'}, 404
+    # add request conditionals
+    data = request.get_json()
+    if("exercise_id" in data):
+        exercise_to_edit.exercise_id = data["exercise_id"]
+    if("weight" in data):
+        exercise_to_edit.weight = data["weight"]
+    if("reps" in data):
+        exercise_to_edit.reps = data["reps"]
+    db.session.commit()
+    return {'message': 'workout exercise updated', 'workoutExercise': exercise_to_edit.to_dict()}

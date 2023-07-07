@@ -1,14 +1,10 @@
-import LoginFormModal from "../LoginFormModal"
-import SignupFormPage from "../SignupFormPage"
-import OpenModalButton from "../OpenModalButton"
 import {useHistory, NavLink} from 'react-router-dom'
-import { login } from "../../store/session"
 import { useDispatch, useSelector } from "react-redux"
-import * as sessionActions from "../../store/session"
 import { useEffect } from "react"
 import { getAllRoutinesThunk } from "../../store/routines"
 import RoutinesIndex from "../Routines/RoutinesIndex"
 import { getAllExercisesThunk } from "../../store/exercises"
+import { postWorkoutThunk, getAllWorkoutsThunk } from "../../store/workouts"
 import "./HomePage.css"
 function HomePage(){
     const dispatch = useDispatch()
@@ -22,14 +18,26 @@ function HomePage(){
         // console.log("000000000001-1--1-1-1")
         dispatch(getAllRoutinesThunk())
         dispatch(getAllExercisesThunk())
+        dispatch(getAllWorkoutsThunk())
         // [dispatch]
     }, [dispatch])
+    const startWorkout = async(e) => {
+        e.preventDefault()
+        const data = await dispatch(postWorkoutThunk())
+        console.log("data in startworkout: ", data)
+        if(data){
+            history.push(`/workouts/${data.id}/edit`)
+        }else{
+            return alert("Something went wrong! refresh and try again")
+        }
+
+    }
     if(!user){
         history.push("/")
     }
     return (
         <div className="homepage">
-                <button className="workout-button"onClick={(e)=> alert("Feature coming soon...")}>START WORKOUT</button>
+                <button className="workout-button"onClick={(e)=> startWorkout(e)}>START WORKOUT</button>
             <RoutinesIndex />
         </div>
     )

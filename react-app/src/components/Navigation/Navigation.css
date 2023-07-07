@@ -15,6 +15,13 @@ li {
   margin-left: 20px;
   justify-self: flex-end;
   color: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.a-navlink:hover{
+  color: #cbe1f8;
 }
 
 

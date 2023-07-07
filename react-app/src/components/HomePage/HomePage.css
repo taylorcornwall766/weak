@@ -69,13 +69,13 @@
   }
   .delete:hover{
     color: red;
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
   }
 
   .edit:hover {
     background-color: #0056b3;
     color: white;
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
   }
   .new-routine-button {
     display: flex;
