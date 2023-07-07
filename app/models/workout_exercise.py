@@ -28,5 +28,5 @@ class WorkoutExercise(db.Model):
             'exerciseId': self.exercise_id,
             'weight': self.weight,
             'reps': self.reps,
-            'exercise':self.workout_exercise_exercise.to_dict()
+            # 'exercise':self.workout_exercise_exercise.to_dict()
         }

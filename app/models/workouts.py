@@ -17,13 +17,14 @@ class Workout(db.Model):
     )
 
     workout_workout_exercise = db.relationship(
-        "WorkoutExercise", back_populates='workout_exercise_workout'
+        "WorkoutExercise", back_populates='workout_exercise_workout',
+        cascade="all, delete"
     )
     # self.created_at.strftime("%Y-%m-%d-%H:%M")
     def to_dict(self):
         return{
             'id': self.id,
-            'authorId': self.workoutAuthorId.to_exercise_dict(),
+            # 'authorId': self.workoutAuthorId.to_exercise_dict(),
             'startedAt': self.started_at.strftime("%Y-%m-%d-%H:%M"),
             'endedAt': self.ended_at and self.ended_at.strftime("%Y-%m-%d-%H:%M"),
             'workoutExercises': [workout.to_dict() for workout in self.workout_workout_exercise]
