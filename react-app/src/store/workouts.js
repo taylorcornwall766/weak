@@ -1,5 +1,6 @@
 const GET_ALL_WORKOUTS = "workouts/getAllWorkouts";
 const POST_WORKOUT = "workouts/postWorkout";
+const POST_WORKOUT_EXERCISE = "workouts/postWorkoutExercise"
 
 const getAllWorkouts = (workouts) => {
     return {
@@ -15,21 +16,19 @@ const postWorkout = (workout) => {
     }
 }
 
+const postWorkoutExercise = (workoutExercise) => {
+    return {
+        type: POST_WORKOUT_EXERCISE,
+        payload: workoutExercise
+    }
+}
+
 export const getAllWorkoutsThunk = () => async (dispatch) => {
     const workoutResponse = await fetch(`/api/workouts/current`)
     const data = await workoutResponse.json()
 
     if(workoutResponse.ok) {
-        const normalWorkouts = {}
-        data.workouts.forEach((workout) => {
-            const normalWorkoutExercises = {}
-            normalWorkouts[workout.id] = workout
-            workout.workoutExercises.forEach((wExercise) => {
-                normalWorkoutExercises[wExercise.id] = wExercise
-            })
-            normalWorkouts[workout.id].workoutExercises = normalWorkoutExercises
-        })
-        dispatch(getAllWorkouts(normalWorkouts))
+        dispatch(getAllWorkouts(data.workouts))
     }
 }
 
@@ -40,9 +39,22 @@ export const postWorkoutThunk = () => async (dispatch) => {
     })
     const data = await response.json()
     if(response.ok){
-        data.workoutExercises = {}
         dispatch(postWorkout(data))
         return data
+    }
+    return null
+}
+
+export const postWorkoutExerciseThunk = (workoutExercise, workoutId) => async (dispatch) => {
+    const response = await fetch(`/api/workouts/${workoutId}/new`,{
+            method:"post",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(workoutExercise)
+    })
+    const data = await response.json()
+    if(response.ok){
+        dispatch(postWorkoutExercise(data.workoutExercise))
+        return data.workoutExercise
     }
     return null
 }
@@ -58,6 +70,11 @@ const workoutReducer = (state = initialState, action) => {
         case POST_WORKOUT:{
             newState = {...state}
             newState[action.payload.id] = {...action.payload}
+            return newState
+        }
+        case POST_WORKOUT_EXERCISE:{
+            newState = {...state}
+            newState[action.payload.workoutId].workoutExercises.push(action.payload)
             return newState
         }
         default:

@@ -27,5 +27,5 @@ class Workout(db.Model):
             # 'authorId': self.workoutAuthorId.to_exercise_dict(),
             'startedAt': self.started_at.strftime("%Y-%m-%d-%H:%M"),
             'endedAt': self.ended_at and self.ended_at.strftime("%Y-%m-%d-%H:%M"),
-            'workoutExercises': [workout.to_dict() for workout in self.workout_workout_exercise]
+            'workoutExercises': [workoutExercise.to_dict() for workoutExercise in self.workout_workout_exercise]
         }

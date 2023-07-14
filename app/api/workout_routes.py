@@ -75,7 +75,7 @@ def post_workout_exercise(workout_id):
         )
         db.session.add(new_workout_exercise)
         db.session.commit()
-        return {'message': 'exercise added to workout'}
+        return {'message': 'exercise added to workout', 'workoutExercise':new_workout_exercise.to_dict()}
     else:
         return form.errors, 400
 
