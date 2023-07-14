@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from app.models.workouts import Workout
+from app.models.user import User
 from app.models.workout_exercise import WorkoutExercise
 from app.models.db import db
 from app.forms.workout_exercise_form import WorkoutExerciseForm
@@ -22,9 +23,11 @@ def get_current_users_workouts():
 @login_required
 def post_workout():
     current_user_id = int(current_user.id)
+    current_user_data = User.query.get(current_user_id)
     new_workout = Workout(
         author_id = current_user_id
     )
+    current_user_data.isWorkingOut = True
     db.session.add(new_workout)
     db.session.commit()
     return new_workout.to_dict()
@@ -45,11 +48,13 @@ def delete_workout(workout_id):
 @login_required
 def complete_workout(workout_id):
     workout_to_complete = Workout.query.get(workout_id)
+    current_user_data = User.query.get(int(current_user.id))
     if workout_to_complete is None:
         return {'errors':'workout not found'}, 404
     if workout_to_complete.author_id is not int(current_user.id):
         return {'errors': 'you can only complete workouts you have created!'}, 401
     workout_to_complete.ended_at = datetime.utcnow()
+    current_user_data.isWorkingOut = False
     db.session.commit()
     return {'message': 'workout completed',
             'workout': workout_to_complete.to_dict()

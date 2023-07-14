@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(25), nullable=False)
     height = db.Column(db.Integer, nullable=True)
     private = db.Column(db.Boolean, nullable=False, default=False)
+    isWorkingOut = db.Column(db.Boolean, nullable=False, default=False)
+
 
     @property
     def password(self):
@@ -39,7 +41,8 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'height': self.height,
-            'private': self.private
+            'private': self.private,
+            'isWorkingOut': self.isWorkingOut
         }
     def to_exercise_dict(self):
         return {
