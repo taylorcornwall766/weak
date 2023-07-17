@@ -1,44 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import workoutReducer, { getAllWorkoutsThunk, postWorkoutThunk, postWorkoutExerciseThunk } from "../../store/workouts";
+import workoutReducer, { getAllWorkoutsThunk, postWorkoutThunk } from "../../store/workouts";
 import "./WorkoutExercise.css"
-function WorkoutExerciseForm({exercises, setShowForm, setWorkoutExercises, workoutId, workoutExercises}){
+function WorkoutExerciseCard({exercises, setShowForm, setWorkoutExercises}){
+    // preload will be used to pre-populate the form
     const dispatch = useDispatch()
     const [readOnly, setReadOnly] = useState(true)
+    // const readOnly = false
     const [exerciseId, setExerciseId] = useState("")
-    const [reps, setReps] = useState("")
-    const [weight, setWeight] = useState("")
-    const [errors, setErrors] = useState({})
+    const [reps, setReps] = useState(0)
+    const [weight, setWeight] = useState(0)
     const handleSubmit = async(e) => {
         e.preventDefault()
-        let errors = false
-        if(!reps){
-            setErrors({...errors, reps:"Please provide a valid number of reps."})
-            errors = true
-        }
-        if(!weight){
-            setErrors({...errors, weight:"Please provide a valid amount of weight, if its a body weight exercise put your body weight."})
-            errors = true
-        }
-        if(!exerciseId){
-            setErrors({...errors, exercise:"Please select an exercise."})
-            errors = true
-        }
-        if(errors){
-            return
-        }else{
-            const data = await dispatch(postWorkoutExerciseThunk({"exercise_id": exerciseId, "reps": reps, "weight": weight},workoutId))
-            console.log(data)
-            if(data){
-                console.log("workoutExercises before anything: ", workoutExercises)
-                let newWorkoutExercises = workoutExercises
-                newWorkoutExercises.push(data.workoutExercise)
-                setWorkoutExercises(newWorkoutExercises)
-                console.log("workoutExercises after anything: ", workoutExercises)
-                return alert("added")
-            }
-        }
     }
     return(
         <form className="edit-routine-form editableCard"
@@ -75,7 +49,6 @@ function WorkoutExerciseForm({exercises, setShowForm, setWorkoutExercises, worko
                         min="1"
                         max="99"
                         disabled={readOnly}
-                        placeholder="0"
                         />
                     </label>
                     <label className="circleInputLabel">
@@ -89,7 +62,6 @@ function WorkoutExerciseForm({exercises, setShowForm, setWorkoutExercises, worko
                         min="1"
                         max="1999"
                         disabled={readOnly}
-                        placeholder="0"
                     />
                     </label>
                     <button type="submit" className="card-button">
@@ -98,4 +70,4 @@ function WorkoutExerciseForm({exercises, setShowForm, setWorkoutExercises, worko
         </form>
     )
 }
-export default WorkoutExerciseForm
+export default WorkoutExerciseCard
