@@ -32,7 +32,7 @@ function WorkoutExerciseForm({exercises, setShowForm, setWorkoutExercises, worko
             console.log(data)
             if(data){
                 console.log("workoutExercises before anything: ", workoutExercises)
-                let newWorkoutExercises = workoutExercises
+                let newWorkoutExercises = [...workoutExercises]
                 newWorkoutExercises.push(data.workoutExercise)
                 setWorkoutExercises(newWorkoutExercises)
                 console.log("workoutExercises after anything: ", workoutExercises)

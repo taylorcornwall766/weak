@@ -1,6 +1,7 @@
 const GET_ALL_WORKOUTS = "workouts/getAllWorkouts";
 const POST_WORKOUT = "workouts/postWorkout";
 const POST_WORKOUT_EXERCISE = "workouts/postWorkoutExercise";
+const DELETE_WORKOUT_EXERCISE = "workouts/deleteWorkoutExercise"
 
 const getAllWorkouts = (workouts) => {
   return {
@@ -22,6 +23,13 @@ const postWorkoutExercise = (workoutExercise) => {
     payload: workoutExercise,
   };
 };
+
+const deleteWorkoutExercise = (workoutExercise) => {
+    return {
+        type: DELETE_WORKOUT_EXERCISE,
+        payload: workoutExercise
+    }
+}
 
 export const getAllWorkoutsThunk = () => async (dispatch) => {
   const workoutResponse = await fetch(`/api/workouts/current`);
@@ -61,6 +69,20 @@ export const postWorkoutExerciseThunk =
     return null;
   };
 
+export const deleteWorkoutExerciseThunk = (workoutExercise) => async (dispatch) =>{
+    const response = await fetch(`/api/workouts/${workoutExercise.workoutId}/exercises/${workoutExercise.id}/delete`, {
+        method: "delete",
+        headers: {"Content-Type": "application/json"}
+    })
+    const data = await response.json()
+    if(response.ok){
+        dispatch(deleteWorkoutExercise(workoutExercise))
+        return data
+    }
+    return null
+
+}
+
 const initialState = {"current": [], "others":[]};
 const workoutReducer = (state = initialState, action) => {
   let newState = {};
@@ -71,7 +93,7 @@ const workoutReducer = (state = initialState, action) => {
     }
     case POST_WORKOUT: {
       newState = { ...state };
-      newState.current.push = action.payload;
+      newState.current.push(action.payload);
       return newState;
     }
     case POST_WORKOUT_EXERCISE: {
@@ -85,6 +107,12 @@ const workoutReducer = (state = initialState, action) => {
     // deprecated and requires object state of workout
     //   newState[action.payload.workoutId].workoutExercises.push(action.payload);
       return newState;
+    }
+    case DELETE_WORKOUT_EXERCISE: {
+        newState = {...state}
+        const currentWorkout = newState.current[newState.current.findIndex((workout)=> workout.id == action.payload.workoutId)]
+        currentWorkout.workoutExercises = currentWorkout.workoutExercises.filter((workoutExercise)=> workoutExercise.id !== action.payload.id)
+        return newState
     }
     default:
       return state;
