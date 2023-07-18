@@ -6,6 +6,7 @@ import RoutinesIndex from "../Routines/RoutinesIndex"
 import { getAllExercisesThunk } from "../../store/exercises"
 import { postWorkoutThunk, getAllWorkoutsThunk } from "../../store/workouts"
 import "./HomePage.css"
+import WorkoutsIndex from '../WorkoutIndex/WorkoutsIndex'
 function HomePage(){
     const dispatch = useDispatch()
     const history = useHistory()
@@ -38,6 +39,7 @@ function HomePage(){
     return (
         <div className="homepage">
                 <button className="workout-button"onClick={(e)=> startWorkout(e)}>START WORKOUT</button>
+            <WorkoutsIndex />
             <RoutinesIndex />
         </div>
     )

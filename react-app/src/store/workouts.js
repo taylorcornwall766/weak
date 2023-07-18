@@ -2,6 +2,14 @@ const GET_ALL_WORKOUTS = "workouts/getAllWorkouts";
 const POST_WORKOUT = "workouts/postWorkout";
 const POST_WORKOUT_EXERCISE = "workouts/postWorkoutExercise";
 const DELETE_WORKOUT_EXERCISE = "workouts/deleteWorkoutExercise"
+const COMPLETE_WORKOUT = "workouts/completeWorkout"
+
+const completeWorkout = (workout) => {
+  return {
+    type: COMPLETE_WORKOUT,
+    payload: workout
+  }
+}
 
 const getAllWorkouts = (workouts) => {
   return {
@@ -83,6 +91,19 @@ export const deleteWorkoutExerciseThunk = (workoutExercise) => async (dispatch) 
 
 }
 
+export const completeWorkoutThunk = (workout) => async(dispatch) => {
+  const response = await fetch(`/api/workouts/${workout.id}/complete`,{
+    method:"put",
+    headers: {"Content-Type":"application/json"}
+  })
+  const data = await response.json()
+  if(response.ok){
+    dispatch(completeWorkout(data.workout))
+    return data
+  }
+  return null
+}
+
 const initialState = {"current": [], "others":[]};
 const workoutReducer = (state = initialState, action) => {
   let newState = {};
@@ -113,6 +134,11 @@ const workoutReducer = (state = initialState, action) => {
         const currentWorkout = newState.current[newState.current.findIndex((workout)=> workout.id == action.payload.workoutId)]
         currentWorkout.workoutExercises = currentWorkout.workoutExercises.filter((workoutExercise)=> workoutExercise.id !== action.payload.id)
         return newState
+    }
+    case COMPLETE_WORKOUT: {
+      newState = {...state}
+      newState.current[newState.current.findIndex((workout)=> workout.id == action.payload.workoutId)] = action.payload
+      return newState
     }
     default:
       return state;

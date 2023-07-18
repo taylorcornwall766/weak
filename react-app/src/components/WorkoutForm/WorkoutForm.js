@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllExercisesThunk } from "../../store/exercises";
-import { getAllWorkoutsThunk, postWorkoutThunk } from "../../store/workouts";
+import { completeWorkoutThunk, getAllWorkoutsThunk, postWorkoutThunk } from "../../store/workouts";
 import WorkoutExerciseForm from "./WorkoutExerciseForm";
 import WorkoutExerciseCard from "./WorkoutCards";
 
 function WorkoutForm() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const { workoutId } = useParams();
   const user = useSelector((state) => state.session.user);
   const exercisesObj = useSelector((state) => state.exercise);
@@ -39,6 +40,13 @@ function WorkoutForm() {
     }
     return `${timeArr.join(":")} ${isPm ? "p.m." : "a.m."} `;
   };
+
+  const completeWorkout = async() => {
+    const data = await dispatch(completeWorkoutThunk(workout))
+    if(data){
+      history.push("/home")
+    }
+  }
   return (
     <div className="edit-routine-container">
       <WorkoutExerciseForm
@@ -49,7 +57,9 @@ function WorkoutForm() {
       />
       <div className="button-container">
         <button className="delete">CANCEL WORKOUT</button>
-        <button className="edit">COMPLETE</button>
+        {
+          <button className="edit" onClick={completeWorkout}>COMPLETE</button>
+        }
       </div>
       <div>
         {workout && [...workout.workoutExercises].reverse().map((exercise) => (

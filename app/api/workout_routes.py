@@ -53,6 +53,9 @@ def complete_workout(workout_id):
         return {'errors':'workout not found'}, 404
     if workout_to_complete.author_id is not int(current_user.id):
         return {'errors': 'you can only complete workouts you have created!'}, 401
+    if workout_to_complete.ended_at is not False:
+        return {'message': 'workout already completed!',
+                'workout': workout_to_complete.to_dict()}
     workout_to_complete.ended_at = datetime.utcnow()
     current_user_data.isWorkingOut = False
     db.session.commit()

@@ -12,16 +12,18 @@
     height: 100px;
     border-radius: 100%;
     text-align: center;
-    background-color: #007bff;
+    /* background-color: #007bff; */
     font-weight: bold;
-    color: white;
+    color: black;
     font-size: 25px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     margin: 0 5px;
     border: none;
+    background-color: #e4e4e4;
+    border: 4px solid #007bff
 }
 .circleField:focus{
-    border: none;
+    border: 4px solid rgb(0, 77, 160);
     outline: none;
 }
 .inline-select{
@@ -64,5 +66,9 @@ input::-webkit-outer-spin-button,
         -moz-appearance: textfield;
       }
 input.circleField.circleField-inactive {
-    background-color: darkgray;
+    background-color: #d7d7d7;
+    height: 75px;
+    width: 75px;
+    font-size: 20px;
+    font-weight:600;
 }

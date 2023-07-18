@@ -22,6 +22,9 @@ const EditRoutineForm = () => {
   }, [dispatch]);
   const routines = useSelector((state) => state.routine);
   const routine = routines[routineId];
+  if( !user){
+    history.push("/")
+  }
   if (routine && user.id !== routine.author.id) {
     history.push("/home");
   }
