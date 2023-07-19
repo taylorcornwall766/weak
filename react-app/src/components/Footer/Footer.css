@@ -1,0 +1,47 @@
+.linkedinLogo,
+.githubLogo {
+    width: 15px;
+    margin: 5px;
+    padding-top:3px;
+}
+.tech-icons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+.tech-icons {
+    width: 30px;
+    height: 30px;
+  }
+
+.footer-contributors {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+.footer-container {
+    text-align: center;
+    background-color: #23252b;
+    width: 100%;
+    margin-bottom: 0px;
+    height: 82px;
+    /* position: absolute; */
+    padding-bottom: 20px;
+    bottom:0;
+    /* align-self: flex-end; */
+    margin-top: auto;
+}
+.footerNameBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footerNameTag{
+    color:white;
+}
+#root{
+    display:flex;
+    flex-direction: column;
+}

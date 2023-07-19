@@ -43,10 +43,12 @@ function WorkoutForm() {
 
   const completeWorkout = async() => {
     const data = await dispatch(completeWorkoutThunk(workout))
+    console.log(data)
     if(data){
       history.push("/home")
     }
   }
+  console.log("workout: ", workout)
   return (
     <div className="edit-routine-container">
       <WorkoutExerciseForm
@@ -56,8 +58,8 @@ function WorkoutForm() {
         workoutId={workoutId}
       />
       <div className="button-container">
-        <button className="delete">CANCEL WORKOUT</button>
-        {
+        <button onClick={()=>history.push("/home")} className="delete">EXIT WORKOUT</button>
+        {workout &&
           <button className="edit" onClick={completeWorkout}>COMPLETE</button>
         }
       </div>
