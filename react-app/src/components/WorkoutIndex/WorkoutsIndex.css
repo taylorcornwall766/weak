@@ -38,3 +38,9 @@
     font-size: 14px;
     color: #e8e7e7;
 }
+
+h2.empty-message {
+    text-align: center;
+    height: fit-content;
+    margin: auto;
+}

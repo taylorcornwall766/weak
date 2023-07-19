@@ -31,7 +31,7 @@ function WorkoutsIndex() {
     <>
       <h1 className="routines-h1">Workouts</h1>
       <div className="scrollable-container">
-        {workouts.length &&
+        {workouts.length > 0 ?
           workouts.map((workout) => {
             // console.log("workout in map: ", workout, workout.id)
             // console.log("workout.workoutExercises: ", workout.workoutExercises)
@@ -46,7 +46,7 @@ function WorkoutsIndex() {
                 </p>
               </div>
             );
-          })}
+          }): (<h2 className="empty-message">No Workouts yet...</h2>)}
       </div>
     </>
   );
