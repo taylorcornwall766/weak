@@ -72,3 +72,14 @@ input.circleField.circleField-inactive {
     font-size: 20px;
     font-weight:600;
 }
+form.edit-routine-form.editableCard{
+    background-image: linear-gradient(90deg, #007bff 34%, #f1f1f1 66%);
+    background-size: 300%;
+    background-position: right;
+    transition: background-position 0.75s;
+}
+form.edit-routine-form.is-clicked{
+    background-image: linear-gradient(90deg, #007bff 34%, #f1f1f1 66%);
+    background-size: 300%;
+    background-position: left;
+}
