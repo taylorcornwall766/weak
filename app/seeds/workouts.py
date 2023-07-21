@@ -1,16 +1,20 @@
 from sqlalchemy.sql import text
 from app.models.workouts import Workout
 from app.models.db import db, environment, SCHEMA
+from datetime import datetime
 
 def seed_workouts():
     workout1 = Workout(
-        author_id = 1
+        author_id = 1,
+        started_at = datetime.utcnow()
     )
     workout2 = Workout(
-        author_id = 1
+        author_id = 1,
+        started_at = datetime.utcnow()
     )
     workout3 = Workout(
-        author_id = 1
+        author_id = 1,
+        started_at = datetime.utcnow()
     )
     db.session.add(workout1)
     db.session.add(workout2)
