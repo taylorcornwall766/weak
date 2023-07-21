@@ -25,7 +25,7 @@ function HomePage(){
     const startWorkout = async(e) => {
         e.preventDefault()
         const data = await dispatch(postWorkoutThunk())
-        console.log("data in startworkout: ", data)
+        // console.log("data in startworkout: ", data)
         if(data){
             history.push(`/workouts/${data.id}/edit`)
         }else{

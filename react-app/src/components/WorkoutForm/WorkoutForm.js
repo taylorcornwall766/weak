@@ -43,12 +43,12 @@ function WorkoutForm() {
 
   const completeWorkout = async() => {
     const data = await dispatch(completeWorkoutThunk(workout))
-    console.log(data)
+    // console.log(data)
     if(data){
       history.push("/home")
     }
   }
-  console.log("workout: ", workout)
+  // console.log("workout: ", workout)
   return (
     <div className="edit-routine-container">
       <WorkoutExerciseForm
@@ -57,12 +57,6 @@ function WorkoutForm() {
         setWorkoutExercises={setWorkoutExercises}
         workoutId={workoutId}
       />
-      <div className="button-container">
-        <button onClick={()=>history.push("/home")} className="delete">EXIT WORKOUT</button>
-        {workout &&
-          <button className="edit" onClick={completeWorkout}>COMPLETE</button>
-        }
-      </div>
       <div>
         {workout && [...workout.workoutExercises].reverse().map((exercise) => (
           <WorkoutExerciseCard exercises={exercisesObj} preload={exercise} key={exercise.id} setWorkoutExercises={setWorkoutExercises} workoutExercises={workoutExercises}/>
@@ -71,6 +65,14 @@ function WorkoutForm() {
           <WorkoutExerciseCard exercises={exercisesObj} preload={exercise} key={exercise.id}/>
         ))} */}
       </div>
+
+      <div className="button-container">
+        <button onClick={()=>history.push("/home")} className="delete">EXIT WORKOUT</button>
+        {workout &&
+          <button className="edit" onClick={completeWorkout}>COMPLETE</button>
+        }
+      </div>
+
     </div>
   );
 }

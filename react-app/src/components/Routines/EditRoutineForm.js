@@ -59,16 +59,16 @@ const EditRoutineForm = () => {
       setMuscleGroupThree(routine.muscle_group_three || "");
       setMuscleGroupFour(routine.muscle_group_four || "");
       setMuscleGroupFive(routine.muscle_group_five || "");
-      console.log(
-        "routine object values ->  ",
-        Object.values(routine.routine_exercises)
-      );
-      console.log("routine ex before : ", routineExercises);
+      // console.log(
+      //   "routine object values ->  ",
+      //   Object.values(routine.routine_exercises)
+      // );
+      // console.log("routine ex before : ", routineExercises);
       const routineExArr = Object.values(routine.routine_exercises);
       // console.log("routineExArr: ", routineExArr)
       setRoutineExercises([...routineExArr]);
       //   setRoutineTest(routine);
-      console.log("routine ex after : ", routineExercises);
+      // console.log("routine ex after : ", routineExercises);
       // console.log("routineExercises ->  ",routineExercises)
     }
   }, [routine]);
@@ -111,7 +111,7 @@ const EditRoutineForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit");
+    // console.log("submit");
     let formValidated = validate();
     const newRoutine = {
       name: name,
@@ -123,9 +123,9 @@ const EditRoutineForm = () => {
       muscle_group_five: muscleGroupFive || null,
       id: routineId
     };
-    console.log(formValidated);
-    console.log(errors);
-    console.log("mg1: ", muscleGroupOne);
+    // console.log(formValidated);
+    // console.log(errors);
+    // console.log("mg1: ", muscleGroupOne);
     if (formValidated) {
       const newRoutineResponse = await dispatch(editRoutineThunk(newRoutine));
       history.push(`/home`);

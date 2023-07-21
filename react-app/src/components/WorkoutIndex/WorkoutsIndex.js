@@ -6,6 +6,7 @@ function WorkoutsIndex() {
   const dispatch = useDispatch();
   const history = useHistory();
   const workouts = useSelector((state) => state.workout.current);
+
   const dateDictionary = {
     "01": "January",
     "02": "February",
@@ -31,22 +32,30 @@ function WorkoutsIndex() {
     <>
       <h1 className="routines-h1">Workouts</h1>
       <div className="scrollable-container">
-        {workouts.length > 0 ?
-          workouts.map((workout) => {
-            // console.log("workout in map: ", workout, workout.id)
-            // console.log("workout.workoutExercises: ", workout.workoutExercises)
-            // console.log("workout.workoutExercises.length: ", workout.workoutExercises.length)
-            return (
-              <div className="WorkoutTile" onClick={()=>history.push(`/workouts/${workout.id}/edit`)}>
-                <p className="sets-text">
-                  {workout.workoutExercises.length} sets
-                </p>
-                <p className="sets-text date-text">
-                  {dateConverter(workout.startedAt)}
-                </p>
-              </div>
-            );
-          }): (<h2 className="empty-message">No Workouts yet...</h2>)}
+
+          {workouts.length > 0 ? (
+            workouts.map((workout) => {
+              if (workout.workoutExercises.length < 1) {
+                return null;
+              }
+              return (
+                <div
+                  className="WorkoutTile"
+                  onClick={() => history.push(`/workouts/${workout.id}/edit`)}
+                >
+                  <p className="sets-text">
+                    {workout.workoutExercises.length} sets
+                  </p>
+                  <p className="sets-text date-text">
+                    {dateConverter(workout.startedAt)}
+                  </p>
+                </div>
+              );
+            })
+          ) : (
+            <h2 className="empty-message">No Workouts yet...</h2>
+          )}
+
       </div>
     </>
   );

@@ -9,7 +9,7 @@ class Workout(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    started_at = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False)
+    started_at = db.Column(db.DateTime, nullable=False)
     ended_at = db.Column(db.DateTime, nullable=True)
 
     workoutAuthorId = db.relationship(

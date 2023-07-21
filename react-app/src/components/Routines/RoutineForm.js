@@ -57,7 +57,7 @@ const RoutineForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit")
+    // console.log("submit")
     let formValidated = validate();
     const newRoutine = {
       name: name,

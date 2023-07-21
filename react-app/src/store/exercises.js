@@ -3,7 +3,7 @@ const POST_EXERCISE = "exercises/postExercise";
 const DELETE_EXERCISE = "exercise/deleteExercise";
 
 export const editExerciseThunk = (exercise) => async (dispatch) =>{
-    console.log("exercise in thunk :", exercise);
+    // console.log("exercise in thunk :", exercise);
   const editExerciseResponse = await fetch(`/api/exercises/${exercise.id}/edit`, {
     method: "put",
     headers: { "Content-Type": "application/json" },
@@ -14,7 +14,7 @@ export const editExerciseThunk = (exercise) => async (dispatch) =>{
     dispatch(postExercise(editExerciseData));
     return editExerciseData;
   }
-  console.log(editExerciseData);
+  // console.log(editExerciseData);
   return null;
 }
 
@@ -48,7 +48,7 @@ const postExercise = (exercise) => {
 };
 
 export const postExerciseThunk = (exercise) => async (dispatch) => {
-  console.log("exercise in thunk :", exercise);
+  // console.log("exercise in thunk :", exercise);
   const newExerciseResponse = await fetch(`/api/exercises/new`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
@@ -59,7 +59,7 @@ export const postExerciseThunk = (exercise) => async (dispatch) => {
     dispatch(postExercise(newExerciseData));
     return newExerciseData;
   }
-  console.log(newExerciseData);
+  // console.log(newExerciseData);
   return null;
 };
 

@@ -29,13 +29,13 @@ function WorkoutExerciseForm({exercises, setShowForm, setWorkoutExercises, worko
             return
         }else{
             const data = await dispatch(postWorkoutExerciseThunk({"exercise_id": exerciseId, "reps": reps, "weight": weight},workoutId))
-            console.log(data)
+            // console.log("data from dispatch",data)
             if(data){
-                console.log("workoutExercises before anything: ", workoutExercises)
+                // console.log("workoutExercises before anything: ", workoutExercises)
                 let newWorkoutExercises = [...workoutExercises]
                 newWorkoutExercises.push(data.workoutExercise)
                 setWorkoutExercises(newWorkoutExercises)
-                console.log("workoutExercises after anything: ", workoutExercises)
+                // console.log("workoutExercises after anything: ", workoutExercises)
                 return alert("added")
             }
         }

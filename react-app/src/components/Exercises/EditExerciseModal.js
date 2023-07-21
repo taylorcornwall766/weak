@@ -25,9 +25,9 @@ function EditExerciseModal({setDetails, details}) {
             "end_photo": endPhoto || null,
             id:details.id
         }
-        console.log("newExercise object in modal: ",newExercise)
+        // console.log("newExercise object in modal: ",newExercise)
         const data = await dispatch(editExerciseThunk(newExercise))
-        console.log(data)
+        // console.log(data)
         if(data){
             setDetails(data)
             closeModal()

@@ -19,17 +19,34 @@ def get_current_users_workouts():
     res = [workout.to_dict() for workout in usersWorkouts]
     return {"workouts": res}
 
+@workout_routes.route("/<int:workout_id>")
+@login_required
+def get_workout_by_id(workout_id):
+    current_user_id = int(current_user.id)
+    specific_workout = Workout.query.get(workout_id)
+    if specific_workout is None:
+        return {'errors':'workout not found'}, 404
+    if specific_workout.author_id is not current_user_id:
+        return {'errors': 'you can only view workouts you have created!'}, 401
+
+    res = {'workout':specific_workout.to_dict()}
+    return res, 200
+
+
 @workout_routes.route("/new", methods=["POST"])
 @login_required
 def post_workout():
     current_user_id = int(current_user.id)
     current_user_data = User.query.get(current_user_id)
     new_workout = Workout(
-        author_id = current_user_id
+        author_id = current_user_id,
+        started_at = datetime.utcnow()
     )
     current_user_data.isWorkingOut = True
     db.session.add(new_workout)
     db.session.commit()
+    db.session.expire(new_workout)
+    db.session.expire(current_user_data)
     return new_workout.to_dict()
 
 @workout_routes.route("/<int:workout_id>/delete", methods=["DELETE"])
@@ -83,7 +100,7 @@ def post_workout_exercise(workout_id):
         )
         db.session.add(new_workout_exercise)
         db.session.commit()
-        return {'message': 'exercise added to workout', 'workoutExercise':new_workout_exercise.to_dict()}
+        return {'message': 'exercise added to workout', 'workoutExercise':new_workout_exercise.to_dict(), 'workout':workout.to_dict()}
     else:
         return form.errors, 400
 
