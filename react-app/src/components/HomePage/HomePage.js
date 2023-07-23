@@ -55,7 +55,7 @@ function HomePage() {
                         <h2 className="w-header">You're already working out!</h2>
                         <p className="w-text sets-text date-text">Started - {dateConverter(activeWorkout.startedAt)}</p>
                         <p className="w-text sets-text">{activeWorkout.workoutExercises.length} Sets</p>
-                        <p className="w-whisper sets-text w-text">(you may only have one workout active at a time)</p>
+                        <p className="w-whisper sets-text w-text">(slow down big guy, you may only have one workout active at a time, edit your workout and click "complete" to end that workout!)</p>
                     </div>
                     <div className="w-button-box">
                         <button className="w-button delete" onClick={(e)=>setActiveWorkout(false)}>cancel</button>
