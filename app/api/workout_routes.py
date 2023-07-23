@@ -38,6 +38,9 @@ def get_workout_by_id(workout_id):
 def post_workout():
     current_user_id = int(current_user.id)
     current_user_data = User.query.get(current_user_id)
+    first_workout = Workout.query.filter_by(ended_at=None).filter(Workout.workout_workout_exercise.any()).first()
+    if(first_workout):
+        return {'activeWorkout': first_workout.to_dict(), 'message': 'you currently have an active workout!'}, 200
     new_workout = Workout(
         author_id = current_user_id,
         started_at = datetime.utcnow()
@@ -47,7 +50,7 @@ def post_workout():
     db.session.commit()
     db.session.expire(new_workout)
     db.session.expire(current_user_data)
-    return new_workout.to_dict()
+    return {'workout':new_workout.to_dict()}
 
 @workout_routes.route("/<int:workout_id>/delete", methods=["DELETE"])
 @login_required
@@ -74,6 +77,7 @@ def complete_workout(workout_id):
         return {'message': 'workout already completed!',
                 'workout': workout_to_complete.to_dict()}
     workout_to_complete.ended_at = datetime.utcnow()
+
     current_user_data.isWorkingOut = False
     db.session.commit()
     return {'message': 'workout completed',

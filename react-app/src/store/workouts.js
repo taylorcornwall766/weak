@@ -54,11 +54,11 @@ export const postWorkoutThunk = () => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
   });
   const data = await response.json();
-  if (response.ok) {
-    dispatch(postWorkout(data));
-    return data;
+  if (data.workout) {
+    dispatch(postWorkout(data.workout));
   }
-  return null;
+  // console.log("data in thunk: ", data);
+  return data;
 };
 
 export const postWorkoutExerciseThunk =
@@ -141,9 +141,13 @@ const workoutReducer = (state = initialState, action) => {
       newState = { ...state };
       // console.log("action in thunk: ", action);
       // console.log("new state in thunk: ", newState)
-      const workoutIndex = newState.current.findIndex((workout)=> workout.id == action.payload.workout.id)
+      const workoutIndex = newState.current.findIndex(
+        (workout) => workout.id == action.payload.workout.id
+      );
       // console.log("workoutIndex: ", workoutIndex)
-      newState.current[workoutIndex].workoutExercises.push(action.payload.workoutExercise)
+      newState.current[workoutIndex].workoutExercises.push(
+        action.payload.workoutExercise
+      );
 
       return newState;
     }

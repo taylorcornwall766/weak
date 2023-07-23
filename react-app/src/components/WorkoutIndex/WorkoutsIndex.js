@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./WorkoutsIndex.css";
-function WorkoutsIndex() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const workouts = useSelector((state) => state.workout.current);
-
+export const dateConverter = (dateString) => {
+  const dateArr = dateString.split("-");
   const dateDictionary = {
     "01": "January",
     "02": "February",
@@ -21,13 +18,39 @@ function WorkoutsIndex() {
     11: "November",
     12: "December",
   };
-  const dateConverter = (dateString) => {
-    const dateArr = dateString.split("-");
-    const newDateStr = `${dateArr[3]}, ${dateArr[2]} ${
-      dateDictionary[dateArr[1]]
-    }`;
-    return newDateStr;
-  };
+
+  const newDateStr = `${dateArr[3]}, ${dateArr[2]} ${
+    dateDictionary[dateArr[1]]
+  }`;
+  return newDateStr;
+};
+
+function WorkoutsIndex() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const workouts = useSelector((state) => state.workout.current);
+
+  // const dateDictionary = {
+  //   "01": "January",
+  //   "02": "February",
+  //   "03": "March",
+  //   "04": "April",
+  //   "05": "May",
+  //   "06": "June",
+  //   "07": "July",
+  //   "08": "August",
+  //   "09": "September",
+  //   10: "October",
+  //   11: "November",
+  //   12: "December",
+  // };
+  // export const dateConverter = (dateString) => {
+  //   const dateArr = dateString.split("-");
+  //   const newDateStr = `${dateArr[3]}, ${dateArr[2]} ${
+  //     dateDictionary[dateArr[1]]
+  //   }`;
+  //   return newDateStr;
+  // };
   return (
     <>
       <h1 className="routines-h1">Workouts</h1>
@@ -40,7 +63,7 @@ function WorkoutsIndex() {
               }
               return (
                 <div
-                  className={`WorkoutTile`}
+                  className={`WorkoutTile ${workout.endedAt? null : "active-workout"}`}
                   onClick={() => history.push(`/workouts/${workout.id}/edit`)}
                 >
                   <p className="sets-text">
