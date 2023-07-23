@@ -38,7 +38,7 @@ def get_workout_by_id(workout_id):
 def post_workout():
     current_user_id = int(current_user.id)
     current_user_data = User.query.get(current_user_id)
-    first_workout = Workout.query.filter_by(ended_at=None).filter(Workout.workout_workout_exercise.any()).first()
+    first_workout = Workout.query.filter_by(author_id=current_user_id).filter_by(ended_at=None).filter(Workout.workout_workout_exercise.any()).first()
     if(first_workout):
         return {'activeWorkout': first_workout.to_dict(), 'message': 'you currently have an active workout!'}, 200
     new_workout = Workout(

@@ -157,3 +157,41 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
   }
+
+  .modal-box {
+    width: 400px;
+    height: 250px;
+    margin: 100px auto;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.w-text.sets-text{
+  color:black;
+}
+
+.w-box{
+  margin: 0 auto;
+}
+
+p.w-whisper{
+  font-weight: lighter;
+  font-size: 12px;
+  text-transform: none;
+}
+
+.w-header{
+  margin-top: 0px;
+}
+
+.w-button-box {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}

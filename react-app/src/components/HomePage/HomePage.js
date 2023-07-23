@@ -49,12 +49,17 @@ function HomePage() {
       <RoutinesIndex />
       {activeWorkout && (
         <>
-            <div className="modal-background">
-                <div className="modal-box">
+            <div className="modal-background" onClick={(e)=>setActiveWorkout(false)}>
+                <div className="modal-box" onClick={(e)=>e.stopPropagation()}>
                     <div className="w-box">
-                        <h2 className="w-header">Looks like you have an active Workout!</h2>
-                        <p className="w-text sets-text date-text">{dateConverter(activeWorkout.startedAt)}</p>
-                        <p className="w-text sets-text">{activeWorkout.workoutExercises.length}</p>
+                        <h2 className="w-header">You're already working out!</h2>
+                        <p className="w-text sets-text date-text">Started - {dateConverter(activeWorkout.startedAt)}</p>
+                        <p className="w-text sets-text">{activeWorkout.workoutExercises.length} Sets</p>
+                        <p className="w-whisper sets-text w-text">(you may only have one workout active at a time)</p>
+                    </div>
+                    <div className="w-button-box">
+                        <button className="w-button delete" onClick={(e)=>setActiveWorkout(false)}>cancel</button>
+                        <button className="w-button edit" onClick={(e)=>history.push(`/workouts/${activeWorkout.id}/edit`)}>edit workout</button>
                     </div>
                 </div>
             </div>
