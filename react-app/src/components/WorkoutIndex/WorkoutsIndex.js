@@ -25,7 +25,7 @@ function WorkoutsIndex() {
     const dateArr = dateString.split("-");
     const newDateStr = `${dateArr[3]}, ${dateArr[2]} ${
       dateDictionary[dateArr[1]]
-    }, ${dateArr[0]}`;
+    }`;
     return newDateStr;
   };
   return (
@@ -40,7 +40,7 @@ function WorkoutsIndex() {
               }
               return (
                 <div
-                  className="WorkoutTile"
+                  className={`WorkoutTile`}
                   onClick={() => history.push(`/workouts/${workout.id}/edit`)}
                 >
                   <p className="sets-text">
@@ -48,6 +48,8 @@ function WorkoutsIndex() {
                   </p>
                   <p className="sets-text date-text">
                     {dateConverter(workout.startedAt)}
+                    <br></br>
+                    {workout.endedAt?dateConverter(workout.endedAt):"----"}
                   </p>
                 </div>
               );
