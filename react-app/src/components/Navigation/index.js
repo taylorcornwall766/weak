@@ -19,10 +19,10 @@ function Navigation({ isLoaded }){
 			<div className='navbar-right'>
 			<li className="nav-links">
 				<NavLink className="a-navlink" exact to="/home">Home</NavLink>
-				<NavLink className="a-navlink" exact to=""onClick={(e)=>{
+				{/* <NavLink className="a-navlink" exact to=""onClick={(e)=>{
 					e.preventDefault()
 					alert("Feature coming soon...")}
-				}>Leaderboards</NavLink>
+				}>Leaderboards</NavLink> */}
 				<NavLink className="a-navlink" exact to="/exercises">Exercises</NavLink>
 				{/* <NavLink exact to=""onClick={(e)=>{
 					e.preventDefault()
