@@ -31,7 +31,7 @@ function HomePage() {
     if (data.workout) {
       history.push(`/workouts/${data.workout.id}/edit`);
     } else {
-        console.log(data)
+        // console.log(data)
     //   return alert(JSON.stringify(data.activeWorkout, null, 2));
         setActiveWorkout(data.activeWorkout)
         return
