@@ -114,7 +114,7 @@ export const postRoutineThunk = (routine) => async (dispatch) => {
     dispatch(postRoutine(newRoutineData));
     return newRoutineData;
   }
-  console.log(newRoutineData);
+  // console.log(newRoutineData);
   return null;
 };
 
