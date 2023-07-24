@@ -5,7 +5,7 @@ import { getAllExercisesThunk } from "../../store/exercises";
 import { completeWorkoutThunk, getAllWorkoutsThunk, postWorkoutThunk } from "../../store/workouts";
 import WorkoutExerciseForm from "./WorkoutExerciseForm";
 import WorkoutExerciseCard from "./WorkoutCards";
-
+import { dateConverter } from "../WorkoutIndex/WorkoutsIndex";
 function WorkoutForm() {
   const dispatch = useDispatch();
   const history = useHistory()
@@ -48,7 +48,7 @@ function WorkoutForm() {
       history.push("/home")
     }
   }
-  // console.log("workout: ", workout)
+  console.log("workout: ", workout)
   return (
     <div className="edit-routine-container">
       <WorkoutExerciseForm
@@ -68,8 +68,9 @@ function WorkoutForm() {
 
       <div className="button-container">
         <button onClick={()=>history.push("/home")} className="delete">EXIT WORKOUT</button>
-        {workout &&
-          <button className="edit" onClick={completeWorkout}>COMPLETE</button>
+        {workout && workout.endedAt ?
+          (<button className="disabled-button" disabled="true">COMPLETED AT {dateConverter(workout.endedAt)}</button>):
+          (<button className="edit" onClick={completeWorkout}>COMPLETE</button>)
         }
       </div>
 

@@ -83,3 +83,7 @@ form.edit-routine-form.is-clicked{
     background-size: 300%;
     background-position: left;
 }
+.disabled-button:hover{
+    cursor: default;
+    color: black;
+}
