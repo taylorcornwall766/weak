@@ -42,7 +42,29 @@ const deleteWorkoutExercise = (workoutExercise) => {
 export const getAllWorkoutsThunk = () => async (dispatch) => {
   const workoutResponse = await fetch(`/api/workouts/current`);
   const data = await workoutResponse.json();
-  // console.log("data in thunk:", data);
+  console.log("data in thunk:", data);
+  // iterate over the workouts
+  // for(let i = 0; i < data.workouts; i++){
+  //   // for each workout, check if they have exercises
+  //   let curr = data.workouts[i]
+  //   if(data.workouts.workoutExercises.length > 0){
+  //     let groupedSets = []
+  //     let currentExercises = []
+  //     let prevExerciseId = -1
+  //     // if they have exercises, loop over the exercises
+  //     for(let i=0; i < curr.workoutExercises.length; i++){
+  //       // at each exercise, check if its exercise id matches the one before it, if it does, add it to an array, if it doesnt push that array to an array and then make the array empty again and push this into that and update the current exercise variable
+  //       let currSet = curr.workoutExercises[i]
+  //       if(currSet.exerciseId === prevExerciseId){
+  //         currentExercises.push(currSet)
+  //       }else{
+  //         if(currentExercises.length > 1){
+  //           groupedSets.push(currentExercises)
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
   if (workoutResponse.ok) {
     dispatch(getAllWorkouts(data.workouts));
   }
