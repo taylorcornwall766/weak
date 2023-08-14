@@ -50,7 +50,6 @@ function NewWorkoutForm() {
   console.log("workout: ", workout);
   return (
     <>
-      <h1>Test</h1>
       {groupedSetState.map((setGroup, groupIndex) => (
         <div key={groupIndex} className="grouped-set">
           <h3>{exercises[setGroup[0].exerciseId].name}</h3>
