@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllWorkoutsThunk } from "../../../store/workouts";
 import { getAllExercisesThunk } from "../../../store/exercises";
-import 
+import "../WorkoutExercise.css";
 function NewWorkoutForm() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -16,7 +16,7 @@ function NewWorkoutForm() {
         state.workout.current.findIndex((workout) => workout.id == "47")
       ]
   );
-  const [groupedSetState, setGroupedSetState] = useState([])
+  const [groupedSetState, setGroupedSetState] = useState([]);
 
   useEffect(() => {
     if (workout && workout.workoutExercises.length > 0) {
@@ -43,34 +43,6 @@ function NewWorkoutForm() {
       setGroupedSetState(groupedSets);
     }
   }, [workout]);
-  // if (workout) {
-  //   if (workout.workoutExercises.length > 0) {
-  //     let groupedSets = [];
-  //     let currentExercises = [];
-  //     let prevExerciseId = -1;
-  //     // if they have exercises, loop over the exercises
-  //     for (let i = 0; i < workout.workoutExercises.length; i++) {
-  //       // at each exercise, check if its exercise id matches the one before it, if it does, add it to an array, if it doesnt push that array to an array and then make the array empty again and push this into that and update the current exercise variable
-  //       let currSet = workout.workoutExercises[i];
-  //       if (currSet.exerciseId === prevExerciseId) {
-  //         currentExercises.push(currSet);
-  //       } else {
-  //         if (currentExercises.length > 1) {
-  //           groupedSets.push(currentExercises);
-  //           currentExercises = [];
-  //         }
-  //         prevExerciseId = currSet.exerciseId;
-  //         currentExercises.push(currSet);
-  //       }
-  //     }
-  //     groupedSets.push(currentExercises);
-  //     console.log("grouped sets: ", groupedSets);
-  //     if(groupedSetState !== groupedSets){
-  //       setGroupedSetState(groupedSets)
-  //     }
-  //   }
-  // }
-  //   dispatch(getAllWorkoutsThunk())
   useEffect(() => {
     dispatch(getAllWorkoutsThunk());
     dispatch(getAllExercisesThunk());
@@ -80,16 +52,34 @@ function NewWorkoutForm() {
     <>
       <h1>Test</h1>
       {groupedSetState.map((setGroup, groupIndex) => (
-      <div key={groupIndex} className="grouped-set">
-        <p>{exercises[setGroup[0].exerciseId].name}</p>
-      {setGroup.map((set, setIndex) => (
-      <div key={setIndex} className="box">
-        <p>{set.weight}</p>
-        <p>{set.reps}</p>
-      </div>
-    ))}
-  </div>
-))}
+        <div key={groupIndex} className="grouped-set">
+          <p>{exercises[setGroup[0].exerciseId].name}</p>
+          {setGroup.map((set, setIndex) => (
+            <>
+              <form className="edit-routine-form editableCard" disabled>
+                <label className="circleInputLabel">
+                  Weight
+                  <input
+                    className="circleField circleField-inactive"
+                    type="number"
+                    value={set.weight}
+                    disabled={true}
+                  />
+                </label>
+                <label className="circleInputLabel">
+                  Reps
+                  <input
+                    className="circleField circleField-inactive"
+                    type="number"
+                    value={set.reps}
+                    disabled={true}
+                  />
+                </label>
+              </form>
+            </>
+          ))}
+        </div>
+      ))}
     </>
   );
 }

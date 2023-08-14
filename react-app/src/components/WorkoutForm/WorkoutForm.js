@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllExercisesThunk } from "../../store/exercises";
-import { completeWorkoutThunk, getAllWorkoutsThunk, postWorkoutThunk } from "../../store/workouts";
+import {
+  completeWorkoutThunk,
+  getAllWorkoutsThunk,
+  postWorkoutThunk,
+} from "../../store/workouts";
 import WorkoutExerciseForm from "./WorkoutExerciseForm";
 import WorkoutExerciseCard from "./WorkoutCards";
 import { dateConverter } from "../WorkoutIndex/WorkoutsIndex";
 function WorkoutForm() {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const { workoutId } = useParams();
   const user = useSelector((state) => state.session.user);
   const exercisesObj = useSelector((state) => state.exercise);
@@ -41,14 +45,14 @@ function WorkoutForm() {
     return `${timeArr.join(":")} ${isPm ? "p.m." : "a.m."} `;
   };
 
-  const completeWorkout = async() => {
-    const data = await dispatch(completeWorkoutThunk(workout))
+  const completeWorkout = async () => {
+    const data = await dispatch(completeWorkoutThunk(workout));
     // console.log(data)
-    if(data){
-      history.push("/home")
+    if (data) {
+      history.push("/home");
     }
-  }
-  console.log("workout: ", workout)
+  };
+  console.log("workout: ", workout);
   return (
     <div className="edit-routine-container">
       <WorkoutExerciseForm
@@ -58,22 +62,37 @@ function WorkoutForm() {
         workoutId={workoutId}
       />
       <div>
-        {workout && [...workout.workoutExercises].reverse().map((exercise) => (
-          <WorkoutExerciseCard exercises={exercisesObj} preload={exercise} key={exercise.id} setWorkoutExercises={setWorkoutExercises} workoutExercises={workoutExercises}/>
-          ))}
+        {workout &&
+          [...workout.workoutExercises]
+            .reverse()
+            .map((exercise) => (
+              <WorkoutExerciseCard
+                exercises={exercisesObj}
+                preload={exercise}
+                key={exercise.id}
+                setWorkoutExercises={setWorkoutExercises}
+                workoutExercises={workoutExercises}
+              />
+            ))}
         {/* {workoutExercises && workoutExercises.map((exercise) => (
           <WorkoutExerciseCard exercises={exercisesObj} preload={exercise} key={exercise.id}/>
         ))} */}
       </div>
 
       <div className="button-container">
-        <button onClick={()=>history.push("/home")} className="delete">EXIT WORKOUT</button>
-        {workout && workout.endedAt ?
-          (<button className="disabled-button" disabled="true">COMPLETED AT {dateConverter(workout.endedAt)}</button>):
-          (<button className="edit" onClick={completeWorkout}>COMPLETE</button>)
-        }
+        <button onClick={() => history.push("/home")} className="delete">
+          EXIT WORKOUT
+        </button>
+        {workout && workout.endedAt ? (
+          <button className="disabled-button" disabled="true">
+            COMPLETED AT {dateConverter(workout.endedAt)}
+          </button>
+        ) : (
+          <button className="edit" onClick={completeWorkout}>
+            COMPLETE
+          </button>
+        )}
       </div>
-
     </div>
   );
 }
