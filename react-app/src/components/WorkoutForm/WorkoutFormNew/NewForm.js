@@ -53,14 +53,15 @@ function NewWorkoutForm() {
       <h1>Test</h1>
       {groupedSetState.map((setGroup, groupIndex) => (
         <div key={groupIndex} className="grouped-set">
-          <p>{exercises[setGroup[0].exerciseId].name}</p>
+          <h3>{exercises[setGroup[0].exerciseId].name}</h3>
           {setGroup.map((set, setIndex) => (
             <>
               <form className="edit-routine-form editableCard" disabled>
+                <p className="set-number">{setIndex+1}</p>
                 <label className="circleInputLabel">
                   Weight
                   <input
-                    className="circleField circleField-inactive"
+                    className="circleField circleField-inactive newForm"
                     type="number"
                     value={set.weight}
                     disabled={true}
@@ -69,7 +70,7 @@ function NewWorkoutForm() {
                 <label className="circleInputLabel">
                   Reps
                   <input
-                    className="circleField circleField-inactive"
+                    className="circleField circleField-inactive newForm"
                     type="number"
                     value={set.reps}
                     disabled={true}
